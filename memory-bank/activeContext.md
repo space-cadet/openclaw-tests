@@ -1,8 +1,18 @@
 # Active Context: openclaw-tools
 
-## Current Status: Token-Usage Multi-Source Pricing (2026-07-23)
+## Current Status: Token-Usage v2.3.0 Published (2026-07-27)
 
 ### What Just Happened
+- **Fixed timezone bug**: `--today`/`--yesterday` now use local timezone (Asia/Calcutta/IST) instead of UTC
+  - Root cause: Daily cron at 04:00 IST was computing "yesterday" in UTC, getting wrong day
+  - Fix: Added `zoneinfo.ZoneInfo("Asia/Calcutta")` to parse.py date boundary calculation
+- **Fixed K3 pricing**: Session files store `"model":"k3"` but pricing.json only had `"kimi/k3"`
+  - Fix: Added `"k3"` entry to pricing.json + alias fallback in `estimate_cost()`
+- **Added missing file resilience**: Parser now skips deleted session files gracefully
+- **ClawHub published**: token-usage@2.3.0 (k97d6heqfp7013mg1qvq4hq3ss8b8w8s)
+- **Committed**: `5a3e1c3` on main
+
+### Previous Major Work (2026-07-23)
 - **Built `update-pricing.py`**: Multi-source pricing fetcher for model cost tracking
   - Fetches **342 models** from OpenRouter API (`/api/v1/models`)
   - Scrapes **Moonshot direct pricing** from official docs (CNY→USD at ~7.2 rate)

@@ -3,7 +3,7 @@ name: token-usage
 description: "Track, aggregate, and report OpenClaw token usage and costs across sessions."
 homepage: https://github.com/space-cadet/openclaw-tools/tree/main/skills/token-usage
 license: MIT
-version: "2.2.0"
+version: "2.3.0"
 ---
 
 # Token Usage Tracker
@@ -30,8 +30,8 @@ Parse OpenClaw session JSONL files to extract token usage, aggregate by date/mod
 
 | Flag | Description | Example |
 |------|-------------|---------|
-| `--today` | Current calendar day (UTC) | `--today` |
-| `--yesterday` | Previous calendar day | `--yesterday` |
+| `--today` | Current calendar day (local timezone) | `--today` |
+| `--yesterday` | Previous calendar day (local timezone) | `--yesterday` |
 | `--week` | Last 7 calendar days | `--week` |
 | `--days N` | Last N calendar days | `--days 3` |
 | `--hours N` | Rolling window: last N hours | `--hours 24` |
@@ -83,7 +83,15 @@ python3 ~/.openclaw/skills/token-usage/scripts/parse.py --week --json > /tmp/tok
 | `--json` | Output machine-readable JSON |
 | `--costs` | Add cost estimates (requires pricing data) |
 
-## Data Format
+## Timezone Behavior
+
+`--today` and `--yesterday` use the **local system timezone** (Asia/Calcutta / IST by default). This ensures daily reports align with your local day even when cron jobs run at off-UTC hours (e.g., 04:00 IST = 22:30 UTC previous day).
+
+## Model Aliases
+
+Session files may store model names in short form (`k3`, `k2.7`) or long form (`kimi/k3`). The parser normalizes these for pricing lookup:
+- Short form (`k3`) → tries `k3` then `kimi/k3`
+- Full form (`kimi/k3`) → direct lookup
 
 Sessions are stored as JSONL with lines like:
 ```json
@@ -93,11 +101,13 @@ Sessions are stored as JSONL with lines like:
 ## Cost Estimation
 
 Uses model pricing from `scripts/pricing.json` (user-editable). Default prices:
-- Kimi k2.7 / k3 / k2.7-code: $0.50/1M input, $2.00/1M output
+- Kimi k2.7: $0.90/1M input, $3.75/1M output
+- Kimi k3: $2.78/1M input, $13.89/1M output
+- Kimi k2.7-code: $0.90/1M input, $3.75/1M output
 - Claude Sonnet 4: $3.00/1M input, $15.00/1M output
 - GPT-4o: $2.50/1M input, $10.00/1M output
 
-Costs are approximate. Cache read/write pricing applied when available.
+Costs are approximate. Cache read/write pricing applied when available. Unprefixed model names (e.g. `k3`) are automatically mapped to their full form (`kimi/k3`) for pricing lookup.
 
 ## Session File Management
 
@@ -144,5 +154,4 @@ The `totalTokens` field in session files includes `cacheRead` (cached context wi
 - Only parses assistant messages with `usage` fields (OpenClaw 2026.5+ format)
 - Historical sessions before JSONL format not supported
 - Costs are estimates; actual billing may differ
-- `--today` uses UTC midnight boundary, not local timezone
 - With many session files (7000+), first run may take 10-30 seconds; subsequent runs with `--since` are fast due to mtime filtering

@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Name** | token-usage |
-| **Version** | v2.2.0 |
+| **Version** | v2.3.0 |
 | **One-liner** | Track, aggregate, and report OpenClaw token usage and costs across sessions. |
 
 ## Trigger
@@ -73,6 +73,22 @@ cd scripts && python3 report.py --yesterday --compact
 cd scripts && python3 report.py --week --compact
 cd scripts && python3 report.py --month --compact
 ```
+
+## New in v2.2.1
+
+| Fix | Description |
+|-----|-------------|
+| Timezone-aware daily reports | `--today` and `--yesterday` now use local timezone (Asia/Calcutta / IST) instead of UTC. Fixes daily cron reports at 04:00 IST showing wrong day. |
+| Model alias mapping | Unprefixed model names (e.g., `k3`) are auto-mapped to full form (`kimi/k3`) for pricing lookup. |
+| K3 pricing | Added `k3` entry to `pricing.json` alongside existing `kimi/k3`. |
+| Missing file resilience | Parser gracefully skips deleted/missing session files instead of crashing. |
+
+## New in v2.2.0
+
+| Feature | Flag | Description |
+|---------|------|-------------|
+| Multi-source pricing | `update-pricing.py` | Fetches Kimi direct + OpenRouter pricing |
+| Dreaming token tracking | `parse.py --all` | Parses dreaming session files for total usage |
 
 ## New in v2.1.0
 

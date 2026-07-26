@@ -1,5 +1,18 @@
 # Progress: openclaw-tools Reorganization
 
+## Completed (2026-07-27)
+
+### Token-Usage v2.3.0: Timezone Fix, K3 Pricing, Model Aliases
+- **Fixed timezone bug**: `--today`/`--yesterday` now use local timezone (Asia/Calcutta/IST)
+  - Root cause: 04:00 IST cron was computing "yesterday" in UTC, showing wrong day
+  - Fix: `zoneinfo.ZoneInfo("Asia/Calcutta")` in parse.py date boundaries
+- **Fixed K3 pricing**: Added `"k3"` entry to pricing.json + alias fallback in `estimate_cost()`
+  - Session files store short model names (`k3`) but pricing had only full names (`kimi/k3`)
+- **Missing file resilience**: Parser skips deleted session files gracefully
+- **Updated docs**: SKILL.md timezone behavior + model alias sections; skill-card.md v2.3.0 changelog
+- **ClawHub published**: token-usage@2.3.0
+- **Commit**: `5a3e1c3`
+
 ## Completed (2026-07-23)
 
 ### Token-Usage v2.2.0: Multi-Source Pricing & Model Registry
