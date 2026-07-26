@@ -21,19 +21,44 @@ This skill bootstraps a complete memory-bank documentation system for any projec
 2. Determine the **project name** and **purpose**
 3. Decide if this project uses **text-based** (markdown) or **DB-native** workflow
 4. Know the current time and timezone
+5. Ensure `mb-cli` is installed (run `mb --version` to check)
 
 ## Workflow
 
-### Step 1: Create Directory Structure
+### Step 1: Initialize with `mb-cli` (Recommended)
 
+The `mb-cli` tool creates the entire memory-bank scaffold — files, templates, and database structure — in one command.
+
+```bash
+cd <project-root>
+mb init
+```
+
+This creates:
+- Core files (`tasks.md`, `session_cache.md`, `activeContext.md`, etc.)
+- Template files in `memory-bank/templates/`
+- SQLite database (for DB-native workflow)
+- Directory structure (`tasks/`, `sessions/`, `edits/`, `implementation-details/`)
+
+Options:
+- `mb init --dry-run` — Preview what would be created
+- `mb init --core` — Only core files (skip templates, DB, viewer)
+- `mb init --full` — Reinitialize everything (overwrite existing)
+- `mb init --interactive` — Step-by-step interactive setup
+
+### Step 2: Manual Verification (If `mb-cli` is unavailable)
+
+If `mb-cli` is not installed, create the structure manually:
+
+#### Create Directory Structure
 ```bash
 cd <project-root>
 mkdir -p memory-bank/{tasks,sessions,edits/$(date +%Y-%m-%d),implementation-details}
 ```
 
-### Step 2: Create Core Files
+#### Create Core Files
 
-#### memory-bank/tasks.md
+##### memory-bank/tasks.md
 ```markdown
 # Memory Bank — <Project Name>
 
@@ -173,7 +198,14 @@ git commit -m "(docs)INIT: Initialize memory bank — v6.12 protocol, task track
 
 ## Post-Initialization
 
-After initialization, use **mb-text-workflow** or **mb-db-workflow** for all subsequent updates:
+After initialization, use **mb-cli** for updates whenever possible:
+
+- `mb update` — Record work and regenerate markdown files (DB-native workflow)
+- `mb workflow` — Session work recording with automatic regeneration
+- `mb task` — Task management (create, update, close tasks)
+- `mb session` — Session management
+
+For text-based projects without the database, use **mb-text-workflow** or create edit chunks manually:
 
 1. Create edit chunks in `memory-bank/edits/YYYY-MM-DD/`
 2. Update task files in `memory-bank/tasks/`
