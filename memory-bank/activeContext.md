@@ -2,7 +2,17 @@
 
 ## Current Status: Token-Usage v2.3.0 Published (2026-07-27)
 
-### What Just Happened
+### What Just Happened (2026-07-28)
+- **Imported mem-* skills from Deepak's `.agents/skills/`**: `mem-update`, `mem-scan`, `mem-format`, `mem-load`
+  - Adapted for Sage's workspace with **project-repo awareness** (Step 0)
+  - **Problem fixed**: `mb-text-workflow` lacked project-repo awareness, causing T35c to be created in workspace instead of timesarrow repo
+  - **Solution**: `mem-update` Step 0 scans ALL repos before creating tasks, preventing duplicate/wrong-location entries
+  - **Sanitized**: Removed `/Users/deepak/` and `/Users/sage/` paths, replaced with `~/` and `${MB_CORE_PATH}`
+  - **Skills added to repo**: `mem-format`, `mem-load`, `mem-scan`, `mem-update`
+  - **Registry updated**: `skills-registry.json` now includes all 4 new skills (25 total)
+  - **Committed**: Pending push
+
+### Previous Major Work (2026-07-27)
 - **Fixed timezone bug**: `--today`/`--yesterday` now use local timezone (Asia/Calcutta/IST) instead of UTC
   - Root cause: Daily cron at 04:00 IST was computing "yesterday" in UTC, getting wrong day
   - Fix: Added `zoneinfo.ZoneInfo("Asia/Calcutta")` to parse.py date boundary calculation

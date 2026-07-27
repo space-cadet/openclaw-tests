@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updated": "2026-07-27T04:20:00Z",
+  "updated": "2026-07-28T03:45:00Z",
   "skills": [
     {"name": "beads", "version": "1.0.0", "category": "memory", "description": "Dolt-powered issue tracker for AI coding workflows", "hasScripts": false, "hasSkillCard": true},
     {"name": "bookmarks", "version": "1.0.0", "category": "memory", "description": "Save, list, search, and manage message bookmarks", "hasScripts": true, "hasSkillCard": true},
@@ -8,6 +8,10 @@
     {"name": "cron-management", "version": "1.0.0", "category": "monitoring", "description": "Manage OpenClaw cron jobs — list, pause, resume, maintenance mode, and health checks", "hasScripts": true, "hasSkillCard": true},
     {"name": "graph-memory", "version": "1.0.0", "category": "memory", "description": "Query the agent's knowledge graph for entities, relationships, and statistics", "hasScripts": true, "hasSkillCard": true},
     {"name": "image-handoff", "version": "1.0.0", "category": "utility", "description": "Detect image generation requests and route them to an artist agent", "hasScripts": false, "hasSkillCard": true},
+    {"name": "mem-format", "version": "1.0.0", "category": "memory", "description": "Format memory bank files for v6.12 compliance — template validation and cleanup", "hasScripts": false, "hasSkillCard": true},
+    {"name": "mem-load", "version": "1.0.0", "category": "memory", "description": "Load memory bank context efficiently — session cache and active context retrieval", "hasScripts": false, "hasSkillCard": true},
+    {"name": "mem-scan", "version": "1.0.0", "category": "memory", "description": "Global memory bank deep scan and task analysis — multi-repo aware", "hasScripts": false, "hasSkillCard": true},
+    {"name": "mem-update", "version": "1.0.0", "category": "memory", "description": "Memory bank update workflow — v6.12 compliant with project-repo awareness", "hasScripts": false, "hasSkillCard": true},
     {"name": "mb-db-workflow", "version": "1.0.0", "category": "memory", "description": "Update memory bank via SQLite + markdown regeneration", "hasScripts": false, "hasSkillCard": true},
     {"name": "mb-init", "version": "1.0.0", "category": "memory", "description": "Initialize a memory bank for a new or existing project", "hasScripts": false, "hasSkillCard": true},
     {"name": "mb-text-workflow", "version": "1.0.0", "category": "memory", "description": "Update memory bank via markdown editing", "hasScripts": false, "hasSkillCard": true},

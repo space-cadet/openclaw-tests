@@ -164,3 +164,23 @@ OpenClaw has no built-in `enable`/`disable` command for cron jobs. The user had 
 3. **Maintenance mode** — works even if OpenClaw is down
 4. **Health visibility** — see failures without digging through individual job states
 
+
+## T9: Import mem-* Skills from .agents (2026-07-28) ✅ COMPLETE
+- [x] Copy `mem-update`, `mem-scan`, `mem-format`, `mem-load` from `~/.agents/skills/`
+- [x] Adapt `mem-update` with project-repo awareness (Step 0)
+  - [x] Scan `code/*/memory-bank/` before workspace memory-bank
+  - [x] Prevent duplicate tasks across workspace and project repos
+- [x] Sanitize paths: remove `/Users/deepak/`, `/Users/sage/`, replace with `~/` and `${MB_CORE_PATH}`
+- [x] Update `skills-registry.json` (25 skills total)
+- [x] Update `memory-bank/activeContext.md`
+- [x] Create edit record
+- [x] Commit and push
+
+### Why This Matters
+The `mb-text-workflow` skill had a critical flaw: it defaulted to workspace memory-bank without checking if the task belonged to a project repo. This caused T35c (timesarrow task) to be created in workspace memory-bank instead of timesarrow's memory-bank. The new `mem-update` skill fixes this by scanning ALL repos before creating tasks.
+
+### Files Added
+- `skills/mem-update/SKILL.md` — Enhanced v6.12 compliance with project-repo awareness
+- `skills/mem-scan/SKILL.md` — Multi-repo deep scan
+- `skills/mem-format/SKILL.md` — Template compliance validation
+- `skills/mem-load/SKILL.md` — Context loading utility
