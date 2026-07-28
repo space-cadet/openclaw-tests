@@ -3,6 +3,12 @@
 ## Current Status: Token-Usage v2.3.0 Published (2026-07-27)
 
 ### What Just Happened (2026-07-28)
+- **Workspace Scripts Convention Established**: Scripts that run as cron jobs now live PHYSICALLY in `~/.openclaw/workspace/scripts/` (the live copies), with backup copies in their respective repos.
+  - `bot2bot-health-check.sh` → `code/bot2bot/check-pipeline-health.sh` (backup)
+  - `bot2bot-start-webhook.sh` → `code/bot2bot/start-sage-webhook.sh` (backup)
+  - `procmon-check-and-start.sh` → `code/process-monitor/check-and-start.sh` (backup)
+  - Each script has a header comment directing: "If you edit this workspace copy, also copy to the repo and commit"
+  - This ensures scripts survive a MacBook wipe (repos are on GitHub) while the live copies run from the workspace
 - **Imported mem-* skills from Deepak's `.agents/skills/`**: `mem-update`, `mem-scan`, `mem-format`, `mem-load`
   - Adapted for Sage's workspace with **project-repo awareness** (Step 0)
   - **Problem fixed**: `mb-text-workflow` lacked project-repo awareness, causing T35c to be created in workspace instead of timesarrow repo
