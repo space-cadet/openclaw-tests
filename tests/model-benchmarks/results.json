@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "benchmark_name": "model-benchmarks",
+  "description": "Cross-model capability benchmarks for OpenClaw agents",
+  "last_updated": "2026-08-01T02:42:00Z",
+  "tasks": [
+    {
+      "id": "lisp-interpreter",
+      "name": "Mini LISP Interpreter",
+      "category": "coding",
+      "difficulty": "medium",
+      "description": "Build a minimal LISP interpreter in Python with lexical scoping, recursion, and error handling",
+      "requirements": [
+        "tokenizer",
+        "parser",
+        "evaluator",
+        "lexical scoping",
+        "recursion",
+        "error handling"
+      ],
+      "test_count": 14,
+      "test_categories": [
+        "arithmetic",
+        "variables",
+        "recursion",
+        "lambda",
+        "lists",
+        "quote",
+        "scopes",
+        "cond",
+        "errors"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "run-20260801-001",
+      "timestamp": "2026-08-01T00:27:00Z",
+      "model": "k3",
+      "provider": "kimi",
+      "model_full": "kimi/k3",
+      "task": "lisp-interpreter",
+      "score": {
+        "passed": 14,
+        "total": 14,
+        "percentage": 100.0
+      },
+      "runtime_seconds": 120,
+      "tokens": {
+        "input": null,
+        "output": null,
+        "total": null
+      },
+      "self_correction_events": 0,
+      "first_pass_score": {
+        "passed": 14,
+        "total": 14
+      },
+      "file": "k3/interpreter.py",
+      "lines_of_code": 370,
+      "notes": "Clean, minimal implementation. Passed all tests on first attempt."
+    },
+    {
+      "run_id": "run-20260801-002",
+      "timestamp": "2026-08-01T02:12:00Z",
+      "model": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "model_full": "deepseek/deepseek-v4-flash",
+      "task": "lisp-interpreter",
+      "score": {
+        "passed": 16,
+        "total": 16,
+        "percentage": 100.0
+      },
+      "runtime_seconds": 321,
+      "tokens": {
+        "input": 20000,
+        "output": 19000,
+        "total": 39000
+      },
+      "self_correction_events": 4,
+      "first_pass_score": {
+        "passed": 12,
+        "total": 16
+      },
+      "file": "deepseek-v4-flash/interpreter.py",
+      "lines_of_code": 480,
+      "notes": "Initial 4 failures (cons, quote, arity). Self-corrected over 5min session. Added 2 extra tests."
+    },
+    {
+      "run_id": "run-20260801-003",
+      "timestamp": "2026-08-01T02:16:00Z",
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "model_full": "deepseek/deepseek-v4-pro",
+      "task": "lisp-interpreter",
+      "score": {
+        "passed": 25,
+        "total": 25,
+        "percentage": 100.0
+      },
+      "runtime_seconds": 153,
+      "tokens": {
+        "input": 9700,
+        "output": 6900,
+        "total": 16600
+      },
+      "self_correction_events": 1,
+      "first_pass_score": {
+        "passed": 24,
+        "total": 25
+      },
+      "file": "deepseek-v4-pro/interpreter.py",
+      "lines_of_code": 565,
+      "notes": "Most thorough. Added 11 extra tests (type predicates, complex nested, arity edge cases)."
+    }
+  ]
+}
