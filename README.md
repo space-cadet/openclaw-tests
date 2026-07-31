@@ -64,7 +64,7 @@ A public, shareable repository of OpenClaw skills, scripts, benchmarks, and util
 
 | Test Suite | Description |
 |------------|-------------|
-| `kimi-benchmarks` | Kimi model benchmarks |
+| `model-benchmarks` | Cross-model capability benchmarks |
 | `subagent-tests` | Subagent test harness and JSON test specs |
 
 ## Contributing

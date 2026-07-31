@@ -1,5 +1,5 @@
 {
-  "name": "kimi-benchmarks",
+  "name": "model-benchmarks",
   "version": "1.0.0",
   "description": "Benchmark comparing Kimi K2.6 vs K2.7 Code coding abilities",
   "type": "module",
