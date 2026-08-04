@@ -16,9 +16,9 @@ Build a minimal LISP interpreter in Python supporting:
 
 | Model | Provider | Score | Runtime | Self-Correction | Extra Tests |
 |-------|----------|-------|---------|-----------------|-------------|
-| **Kimi K3** | Kimi | **14/14 (100%)** | ~2 min | N/A (first pass) | 0 |
-| **DeepSeek v4-Pro** | DeepSeek | **25/25 (100%)** | ~2.5 min | Minor (quote token fix) | 11 |
-| **DeepSeek v4-Flash** | DeepSeek | **16/16 (100%)** | ~5 min | **Major** (4→0 failures) | 2 |
+| **Kimi K3-20260801-002700** | Kimi | **14/14 (100%)** | ~2 min | N/A (first pass) | 0 |
+| **DeepSeek v4-Pro-20260801-021600** | DeepSeek | **25/25 (100%)** | ~2.5 min | Minor (quote token fix) | 11 |
+| **DeepSeek v4-Flash-20260801-021200** | DeepSeek | **16/16 (100%)** | ~5 min | **Major** (4→0 failures) | 2 |
 
 ## Detailed Results
 

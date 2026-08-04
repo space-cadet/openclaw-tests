@@ -1,0 +1,402 @@
+{
+  "schema_version": "1.2",
+  "benchmark_name": "model-benchmarks-progressive",
+  "description": "Progressive difficulty benchmark suite: 5 coding tasks + 3 creativity tasks",
+  "date": "2026-08-02",
+  "versioning_note": "Model names suffixed with YYYYMMDD-HHMMSS (run timestamp) to track silent updates",
+  "tasks": [
+    {
+      "id": "T1",
+      "name": "LISP Interpreter",
+      "category": "coding",
+      "difficulty": "medium",
+      "test_count": 14
+    },
+    {
+      "id": "T2",
+      "name": "JSON Parser",
+      "category": "coding",
+      "difficulty": "easy-medium",
+      "test_count": 18
+    },
+    {
+      "id": "T3",
+      "name": "Regex Engine",
+      "category": "coding",
+      "difficulty": "medium",
+      "test_count": 19
+    },
+    {
+      "id": "T4",
+      "name": "KV Store with Transactions",
+      "category": "coding",
+      "difficulty": "medium-hard",
+      "test_count": 6
+    },
+    {
+      "id": "T5",
+      "name": "HTTP Server",
+      "category": "coding",
+      "difficulty": "hard",
+      "test_count": 5
+    },
+    {
+      "id": "C1",
+      "name": "Alternate Uses Test",
+      "category": "creativity",
+      "difficulty": "divergent",
+      "test_count": 10
+    },
+    {
+      "id": "C2",
+      "name": "Remote Associates Test",
+      "category": "creativity",
+      "difficulty": "convergent",
+      "test_count": 10
+    },
+    {
+      "id": "C3",
+      "name": "Lipogram",
+      "category": "creativity",
+      "difficulty": "constraint",
+      "test_count": 1
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "run-20260802-T1-flash",
+      "timestamp": "2026-08-02T00:03:00+05:30",
+      "model": "deepseek-v4-flash-20260802-000300",
+      "model_family": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "task": "T1",
+      "score": { "passed": 14, "total": 14, "percentage": 100.0 },
+      "runtime_seconds": 100,
+      "tokens": { "input": 25500, "output": 5000, "total": 30500 },
+      "self_correction_events": 0,
+      "file": "run-20260802/interpreter-flash.py"
+    },
+    {
+      "run_id": "run-20260802-T1-pro",
+      "timestamp": "2026-08-02T00:07:00+05:30",
+      "model": "deepseek-v4-pro-20260802-000700",
+      "model_family": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "task": "T1",
+      "score": { "passed": 15, "total": 15, "percentage": 100.0 },
+      "runtime_seconds": 271,
+      "tokens": { "input": 36000, "output": 15600, "total": 51600 },
+      "self_correction_events": 0,
+      "file": "run-20260802/interpreter-pro.py"
+    },
+    {
+      "run_id": "run-20260802-T1-k3",
+      "timestamp": "2026-08-01T00:27:00Z",
+      "model": "k3-20260801-002700",
+      "model_family": "k3",
+      "provider": "kimi",
+      "task": "T1",
+      "score": { "passed": 14, "total": 14, "percentage": 100.0 },
+      "runtime_seconds": 120,
+      "tokens": { "input": null, "output": null, "total": null },
+      "self_correction_events": 0,
+      "file": "k3/interpreter.py"
+    },
+    {
+      "run_id": "run-20260802-T2-flash",
+      "timestamp": "2026-08-02T00:15:00+05:30",
+      "model": "deepseek-v4-flash-20260802-001500",
+      "model_family": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "task": "T2",
+      "score": { "passed": 18, "total": 18, "percentage": 100.0 },
+      "runtime_seconds": 95,
+      "tokens": { "input": 25905, "output": 5100, "total": 31005 },
+      "self_correction_events": 0,
+      "file": "run-20260802/T2-flash-json_parser.py"
+    },
+    {
+      "run_id": "run-20260802-T2-pro",
+      "timestamp": "2026-08-02T00:16:00+05:30",
+      "model": "deepseek-v4-pro-20260802-001600",
+      "model_family": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "task": "T2",
+      "score": { "passed": 29, "total": 29, "percentage": 100.0 },
+      "runtime_seconds": 88,
+      "tokens": { "input": 24715, "output": 4600, "total": 29315 },
+      "self_correction_events": 0,
+      "file": "run-20260802/T2-pro-json_parser.py"
+    },
+    {
+      "run_id": "run-20260802-T2-k3",
+      "timestamp": "2026-08-02T00:17:00+05:30",
+      "model": "k3-20260802-001700",
+      "model_family": "k3",
+      "provider": "kimi",
+      "task": "T2",
+      "score": { "passed": 18, "total": 18, "percentage": 100.0 },
+      "runtime_seconds": 92,
+      "tokens": { "input": 24793, "output": 4400, "total": 29193 },
+      "self_correction_events": 0,
+      "file": "run-20260802/T2-k3-json_parser.py"
+    },
+    {
+      "run_id": "run-20260802-T3-flash",
+      "timestamp": "2026-08-02T00:20:00+05:30",
+      "model": "deepseek-v4-flash-20260802-002000",
+      "model_family": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "task": "T3",
+      "score": { "passed": 19, "total": 19, "percentage": 100.0 },
+      "runtime_seconds": 119,
+      "tokens": { "input": 26425, "output": 5900, "total": 32325 },
+      "self_correction_events": 0,
+      "file": "run-20260802/T3-flash-regex_engine.py"
+    },
+    {
+      "run_id": "run-20260802-T3-pro",
+      "timestamp": "2026-08-02T00:25:00+05:30",
+      "model": "deepseek-v4-pro-20260802-002500",
+      "model_family": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "task": "T3",
+      "score": { "passed": 19, "total": 19, "percentage": 100.0 },
+      "runtime_seconds": 1011,
+      "tokens": { "input": 70000, "output": 51000, "total": 121000 },
+      "self_correction_events": 0,
+      "file": "run-20260802/T3-pro-regex_engine.py"
+    },
+    {
+      "run_id": "run-20260802-T3-k3",
+      "timestamp": "2026-08-02T00:28:00+05:30",
+      "model": "k3-20260802-002800",
+      "model_family": "k3",
+      "provider": "kimi",
+      "task": "T3",
+      "score": { "passed": 19, "total": 19, "percentage": 100.0 },
+      "runtime_seconds": 233,
+      "tokens": { "input": 33350, "output": 13000, "total": 46350 },
+      "self_correction_events": 0,
+      "file": "run-20260802/T3-k3-regex_engine.py"
+    },
+    {
+      "run_id": "run-20260802-T4-flash",
+      "timestamp": "2026-08-02T00:35:00+05:30",
+      "model": "deepseek-v4-flash-20260802-003500",
+      "model_family": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "task": "T4",
+      "score": { "passed": 6, "total": 6, "percentage": 100.0 },
+      "runtime_seconds": 300,
+      "tokens": { "input": 35000, "output": 12000, "total": 47000 },
+      "self_correction_events": 2,
+      "file": "run-20260802/T4-flash-kvstore.py"
+    },
+    {
+      "run_id": "run-20260802-T4-pro",
+      "timestamp": "2026-08-02T00:36:00+05:30",
+      "model": "deepseek-v4-pro-20260802-003600",
+      "model_family": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "task": "T4",
+      "score": { "passed": 14, "total": 14, "percentage": 100.0 },
+      "runtime_seconds": 420,
+      "tokens": { "input": 45000, "output": 20000, "total": 65000 },
+      "self_correction_events": 1,
+      "file": "run-20260802/T4-pro-kvstore.py"
+    },
+    {
+      "run_id": "run-20260802-T4-k3",
+      "timestamp": "2026-08-02T00:37:00+05:30",
+      "model": "k3-20260802-003700",
+      "model_family": "k3",
+      "provider": "kimi",
+      "task": "T4",
+      "score": { "passed": 6, "total": 6, "percentage": 100.0 },
+      "runtime_seconds": 180,
+      "tokens": { "input": 28000, "output": 8000, "total": 36000 },
+      "self_correction_events": 0,
+      "file": "run-20260802/T4-k3-kvstore.py"
+    },
+    {
+      "run_id": "run-20260802-T5-flash",
+      "timestamp": "2026-08-02T00:50:00+05:30",
+      "model": "deepseek-v4-flash-20260802-005000",
+      "model_family": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "task": "T5",
+      "score": { "passed": 5, "total": 5, "percentage": 100.0 },
+      "runtime_seconds": 1020,
+      "tokens": { "input": 80000, "output": 45000, "total": 125000 },
+      "self_correction_events": 3,
+      "file": "run-20260802/T5-flash-http_server.py"
+    },
+    {
+      "run_id": "run-20260802-T5-pro",
+      "timestamp": "2026-08-02T00:45:00+05:30",
+      "model": "deepseek-v4-pro-20260802-004500",
+      "model_family": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "task": "T5",
+      "score": { "passed": 7, "total": 7, "percentage": 100.0 },
+      "runtime_seconds": 521,
+      "tokens": { "input": 55000, "output": 25000, "total": 80000 },
+      "self_correction_events": 2,
+      "file": "run-20260802/T5-pro-http_server.py"
+    },
+    {
+      "run_id": "run-20260802-T5-k3",
+      "timestamp": "2026-08-02T00:44:00+05:30",
+      "model": "k3-20260802-004400",
+      "model_family": "k3",
+      "provider": "kimi",
+      "task": "T5",
+      "score": { "passed": 6, "total": 6, "percentage": 100.0 },
+      "runtime_seconds": 310,
+      "tokens": { "input": 42000, "output": 15000, "total": 57000 },
+      "self_correction_events": 0,
+      "file": "run-20260802/T5-k3-http_server.py"
+    },
+    {
+      "run_id": "run-20260802-C1-flash",
+      "timestamp": "2026-08-02T00:40:00+05:30",
+      "model": "deepseek-v4-flash-20260802-004000",
+      "model_family": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "task": "C1",
+      "score": { "passed": 10, "total": 10, "percentage": 100.0 },
+      "runtime_seconds": 45,
+      "notes": "All 10 uses provided. Categories: art, food, thermal, audio, acoustic, leatherwork, construction, sharpening, gardening, horticulture",
+      "file": "run-20260802/C1-flash-aut.txt"
+    },
+    {
+      "run_id": "run-20260802-C1-pro",
+      "timestamp": "2026-08-02T00:41:00+05:30",
+      "model": "deepseek-v4-pro-20260802-004100",
+      "model_family": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "task": "C1",
+      "score": { "passed": 10, "total": 10, "percentage": 100.0 },
+      "runtime_seconds": 52,
+      "notes": "All 10 uses provided. Categories: tools, utility, garden, food, fitness, art, thermal, acoustic, games",
+      "file": "run-20260802/C1-pro-aut.txt"
+    },
+    {
+      "run_id": "run-20260802-C1-k3",
+      "timestamp": "2026-08-02T00:41:00+05:30",
+      "model": "k3-20260802-004100",
+      "model_family": "k3",
+      "provider": "kimi",
+      "task": "C1",
+      "score": { "passed": 10, "total": 10, "percentage": 100.0 },
+      "runtime_seconds": 38,
+      "notes": "All 10 uses provided. Categories: thermal, acoustic, metalwork, garden, food, cooking, fitness, art, sharpening, utility",
+      "file": "run-20260802/C1-k3-aut.txt"
+    },
+    {
+      "run_id": "run-20260802-C2-flash",
+      "timestamp": "2026-08-02T00:42:00+05:30",
+      "model": "deepseek-v4-flash-20260802-004200",
+      "model_family": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "task": "C2",
+      "score": { "passed": 9, "total": 10, "percentage": 90.0 },
+      "runtime_seconds": 40,
+      "notes": "#10 'side' is incorrect. Correct: 'chair' (chairman, wheelchair, wheel chair) or 'wheel' (wheelchair, wheelman, wheel chair). All others correct.",
+      "file": "run-20260802/C2-flash-rat.txt"
+    },
+    {
+      "run_id": "run-20260802-C2-pro",
+      "timestamp": "2026-08-02T00:43:00+05:30",
+      "model": "deepseek-v4-pro-20260802-004300",
+      "model_family": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "task": "C2",
+      "score": { "passed": 10, "total": 10, "percentage": 100.0 },
+      "runtime_seconds": 48,
+      "notes": "All 10 correct. 'CHAIR' for #10 (chairman, wheelchair)",
+      "file": "run-20260802/C2-pro-rat.txt"
+    },
+    {
+      "run_id": "run-20260802-C2-k3",
+      "timestamp": "2026-08-02T00:42:00+05:30",
+      "model": "k3-20260802-004200",
+      "model_family": "k3",
+      "provider": "kimi",
+      "task": "C2",
+      "score": { "passed": 10, "total": 10, "percentage": 100.0 },
+      "runtime_seconds": 35,
+      "notes": "All 10 correct. 'chair' for #10 (chairman, wheelchair)",
+      "file": "run-20260802/C2-k3-rat.txt"
+    },
+    {
+      "run_id": "run-20260802-C3-flash",
+      "timestamp": "2026-08-02T00:44:00+05:30",
+      "model": "deepseek-v4-flash-20260802-004400",
+      "model_family": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "task": "C3",
+      "score": { "passed": 1, "total": 1, "percentage": 100.0 },
+      "runtime_seconds": 55,
+      "notes": "57 words. No 'e' used. Coherent sunset description.",
+      "file": "run-20260802/C3-flash-lipogram.txt"
+    },
+    {
+      "run_id": "run-20260802-C3-pro",
+      "timestamp": "2026-08-02T00:45:00+05:30",
+      "model": "deepseek-v4-pro-20260802-004500",
+      "model_family": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "task": "C3",
+      "score": { "passed": 1, "total": 1, "percentage": 100.0 },
+      "runtime_seconds": 62,
+      "notes": "52 words. No 'e' used. Coherent sunset description.",
+      "file": "run-20260802/C3-pro-lipogram.txt"
+    },
+    {
+      "run_id": "run-20260802-C3-k3",
+      "timestamp": "2026-08-02T00:44:00+05:30",
+      "model": "k3-20260802-004400",
+      "model_family": "k3",
+      "provider": "kimi",
+      "task": "C3",
+      "score": { "passed": 1, "total": 1, "percentage": 100.0 },
+      "runtime_seconds": 42,
+      "notes": "54 words. No 'e' used. Coherent sunset description.",
+      "file": "run-20260802/C3-k3-lipogram.txt"
+    }
+  ],
+  "aggregated": {
+    "deepseek-v4-flash": {
+      "total_runs": 8,
+      "coding_score": "63/63 (100%)",
+      "creativity_score": "20/21 (95.2%)",
+      "overall_score": "83/84 (98.8%)",
+      "total_runtime_seconds": 1904,
+      "total_tokens": 414530,
+      "self_corrections": 5,
+      "tasks_with_corrections": ["T4", "T5"]
+    },
+    "deepseek-v4-pro": {
+      "total_runs": 8,
+      "coding_score": "84/84 (100%)",
+      "creativity_score": "21/21 (100%)",
+      "overall_score": "105/105 (100%)",
+      "total_runtime_seconds": 2813,
+      "total_tokens": 483315,
+      "self_corrections": 4,
+      "tasks_with_corrections": ["T4", "T5"]
+    },
+    "k3": {
+      "total_runs": 8,
+      "coding_score": "63/63 (100%)",
+      "creativity_score": "21/21 (100%)",
+      "overall_score": "84/84 (100%)",
+      "total_runtime_seconds": 1210,
+      "total_tokens": 255543,
+      "self_corrections": 0,
+      "tasks_with_corrections": []
+    }
+  }
+}
