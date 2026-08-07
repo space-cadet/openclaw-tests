@@ -53,6 +53,7 @@ A public, shareable repository of OpenClaw skills, scripts, benchmarks, and util
 ### Network & System
 | Skill | Description |
 |-------|-------------|
+| `disk-manager` | VPS disk audit and cleanup with persistent operation logging |
 | `netstatus` | Combined network + gateway status with VPN info |
 | `protonvpn-openvpn` | Manage ProtonVPN OpenVPN connections |
 

@@ -6,6 +6,7 @@
     {"name": "bookmarks", "version": "1.0.0", "category": "memory", "description": "Save, list, search, and manage message bookmarks", "hasScripts": true, "hasSkillCard": true},
     {"name": "cloakbrowser-stealth", "version": "1.0.0", "category": "utility", "description": "Stealth browser automation using CloakBrowser to bypass bot detection", "hasScripts": true, "hasSkillCard": true},
     {"name": "cron-management", "version": "1.0.0", "category": "monitoring", "description": "Manage OpenClaw cron jobs — list, pause, resume, maintenance mode, and health checks", "hasScripts": true, "hasSkillCard": true},
+    {"name": "disk-manager", "version": "1.0.0", "category": "monitoring", "description": "VPS disk audit and cleanup with persistent operation logging. Deeper than basic disk-check skills.", "hasScripts": true, "hasSkillCard": true},
     {"name": "graph-memory", "version": "1.0.0", "category": "memory", "description": "Query the agent's knowledge graph for entities, relationships, and statistics", "hasScripts": true, "hasSkillCard": true},
     {"name": "image-handoff", "version": "1.0.0", "category": "utility", "description": "Detect image generation requests and route them to an artist agent", "hasScripts": false, "hasSkillCard": true},
     {"name": "mem-format", "version": "1.0.0", "category": "memory", "description": "Format memory bank files for v6.12 compliance — template validation and cleanup", "hasScripts": false, "hasSkillCard": true},
