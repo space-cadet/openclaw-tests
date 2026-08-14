@@ -1,7 +1,7 @@
 # Session Cache
 
 *Created: 2026-08-14 17:35:37 IST*
-*Last Updated: 2026-08-14 17:35:37 IST*
+*Last Updated: 2026-08-14 18:24:33 IST*
 
 ## Current Session
 **Started**: 2026-08-14 17:35:37 IST
@@ -42,14 +42,14 @@ The direct parser supports more formats than the SQLite importer. The two paths 
 4. ✅ Finished date handling, CLI flags, and cache totals.
 5. ✅ Finished model-aware cron pricing.
 6. ✅ Finished comparison tests and release metadata.
-7. 🔄 Review and publish v2.4.0 to ClawHub.
+7. ✅ Submit v2.4.0 to ClawHub; review is pending.
 
 #### Working State
 No code changes are planned beyond the token-usage skill. Keep notes short and clear.
 ## 2026-08-14 18:30 IST
 
 - T10 code work complete; commit `0371753` is pushed.
-- ClawHub publish remains pending because the CLI could not be installed in the current npm setup.
+- The first publish attempt failed, but the later retry was accepted by ClawHub.
 - Memory-bank updated in simple language.
 
 ## 2026-08-14 18:20 IST

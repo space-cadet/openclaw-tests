@@ -4,9 +4,9 @@
 
 The v2.4.0 code block is complete and pushed in commit `0371753`. ClawHub accepted the release for publication, but it is still pending review. The live latest tag remains 2.3.0 for now.
 
-The direct parser now reads Codex rollout files, but the SQLite importer does not. The two paths also handle prices, cache tokens, aliases, and dates differently. T10 tracks the cleanup.
+The direct parser and SQLite importer now use the same parser. T10 also fixed provider pricing, cache totals, date grouping, CLI windows, and cron reports.
 
-Use simple language in notes. The next code step is a shared parser used by both paths, followed by small tests.
+Use simple language in notes. The code work is complete; only ClawHub review remains.
 
 ## Current Status: Token-Usage v2.3.0 Published (2026-07-27)
 

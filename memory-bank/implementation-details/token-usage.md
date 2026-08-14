@@ -60,7 +60,7 @@ Compare direct and SQLite totals for every fixture.
 - Added tests for an OpenClaw record and a Codex record.
 - Confirmed the earlier Luna session still totals 214,888 new tokens.
 
-The main code block is ready for v2.4.0. ClawHub publishing remains after final review.
+The main code block is complete. ClawHub accepted v2.4.0 and is reviewing it; latest remains 2.3.0 until review finishes.
 ## v2.4.0 status (2026-08-14)
 
 The code work for this block is complete and is in commit `0371753`.
@@ -73,6 +73,6 @@ It now has:
 - local-day grouping and rolling-window flags;
 - tests comparing direct and SQLite totals.
 
-ClawHub publishing was attempted but could not start. The local npm setup tried to install into `/Users/deepak`, which Sage cannot write. A temporary user-local attempt also failed because the npm prefix directory did not exist. No repository files were changed by these attempts.
+The first ClawHub attempt failed because the local npm setup used the wrong prefix. A later user-local retry succeeded.
 
 ClawHub accepted version 2.4.0 for publication. Its version record is `k970jkrargkvx1vyvmcpb11bns8cfhrb`, and its publication state is `pending`. The live latest tag still says 2.3.0 until review finishes.
