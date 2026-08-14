@@ -24,7 +24,7 @@
 **Status:** 🔄 IN PROGRESS
 **Priority:** HIGH
 **Started:** 2026-08-14 17:35:37 IST
-**Last Active:** 2026-08-14 18:28:00 IST
+**Last Active:** 2026-08-14 18:36:00 IST
 **Dependencies:** T5
 
 #### Context
@@ -41,7 +41,8 @@ The direct parser supports more formats than the SQLite importer. The two paths 
 3. ✅ Built the shared parser and tests.
 4. ✅ Finished date handling, CLI flags, and cache totals.
 5. ✅ Finished model-aware cron pricing.
-6. 🔄 Finish full comparison tests and release cleanup.
+6. ✅ Finished comparison tests and release metadata.
+7. 🔄 Review and publish v2.4.0 to ClawHub.
 
 #### Working State
 No code changes are planned beyond the token-usage skill. Keep notes short and clear.

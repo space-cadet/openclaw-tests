@@ -60,4 +60,4 @@ Compare direct and SQLite totals for every fixture.
 - Added tests for an OpenClaw record and a Codex record.
 - Confirmed the earlier Luna session still totals 214,888 new tokens.
 
-Still open: full direct/SQLite comparison tests, more provider fixtures, and release cleanup.
+The main code block is ready for v2.4.0. ClawHub publishing remains after final review.

@@ -26,7 +26,7 @@
     {"name": "red-team", "version": "1.0.0", "category": "security", "description": "Red-team protocol for validating numerical claims before promoting them", "hasScripts": false, "hasSkillCard": true},
     {"name": "time-awareness", "version": "1.0.0", "category": "monitoring", "description": "Current date/time rules — MUST call session_status before any relative-time query", "hasScripts": false, "hasSkillCard": true},
     {"name": "timer-build-monitor", "version": "1.0.0", "category": "monitoring", "description": "Minimal timer skill for one-shot async checks (build monitoring, long-running tasks)", "hasScripts": true, "hasSkillCard": true},
-    {"name": "token-usage", "version": "2.3.0", "category": "monitoring", "description": "Track, aggregate, and report OpenClaw token usage with local timezone-aware daily reports, model alias pricing, and session file management", "hasScripts": true, "hasSkillCard": true},
+    {"name": "token-usage", "version": "2.4.0", "category": "monitoring", "description": "Track token usage across OpenClaw and Codex sessions with provider-aware pricing and cache reports", "hasScripts": true, "hasSkillCard": true},
     {"name": "worker-safety", "version": "1.0.0", "category": "security", "description": "Hard safety limits for AI agent operations — apply unconditionally", "hasScripts": false, "hasSkillCard": true}
   ]
 }

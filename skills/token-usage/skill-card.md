@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Name** | token-usage |
-| **Version** | v2.3.0 |
+| **Version** | v2.4.0 |
 | **One-liner** | Track, aggregate, and report OpenClaw token usage and costs across sessions. |
 
 ## Trigger
@@ -74,7 +74,17 @@ cd scripts && python3 report.py --week --compact
 cd scripts && python3 report.py --month --compact
 ```
 
-## New in v2.2.1
+## New in v2.4.0
+
+| Change | Description |
+|--------|-------------|
+| Shared parser | OpenClaw messages and Codex rollouts use one parser. |
+| Provider support | Kimi, OpenAI/GPT, Claude, and OpenRouter model names are handled. |
+| Cache reporting | Cached tokens appear separately in direct and SQLite reports. |
+| Local dates | UTC timestamps are grouped by the local timezone. |
+| Tests | OpenClaw, Codex, gzip, midnight, and SQLite comparison tests are included. |
+
+## Earlier changes
 
 | Fix | Description |
 |-----|-------------|
