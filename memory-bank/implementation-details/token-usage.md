@@ -52,3 +52,12 @@ Use small fixtures for:
 6. Short and full model names.
 
 Compare direct and SQLite totals for every fixture.
+
+## Work Done 2026-08-14
+
+- Added `common.py` for shared parsing, model aliases, and cost lookup.
+- Connected `parse.py` and `ingest.py` to the shared parser.
+- Added tests for an OpenClaw record and a Codex record.
+- Confirmed the earlier Luna session still totals 214,888 new tokens.
+
+Still open: local-day conversion, SQLite cache/report checks, rolling-window flags, cron pricing, and more provider fixtures.

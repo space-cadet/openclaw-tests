@@ -8,6 +8,12 @@
 - Recorded the plan in `tasks/T10.md` and `implementation-details/token-usage.md`.
 - Next: build one shared parser and add small tests.
 
+### T10 update (2026-08-14)
+- Added `skills/token-usage/scripts/common.py`.
+- Connected the direct parser and SQLite importer to it.
+- Added two parser tests.
+- Remaining work: timezone boundaries, CLI flags, cron pricing, and full SQLite checks.
+
 ## Completed (2026-07-27)
 
 ### Token-Usage v2.3.0: Timezone Fix, K3 Pricing, Model Aliases

@@ -12,6 +12,7 @@ from pathlib import Path
 from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 import glob
+from common import find_sessions as find_shared_sessions, parse_session as parse_shared_session, normalize_model
 
 DEFAULT_PRICING = {
     "kimi/k2.7": {"input": 0.50, "output": 2.00, "cache_read": 0.10, "cache_write": 1.00},
@@ -29,6 +30,8 @@ def load_pricing():
 
 def find_sessions(base_paths=None):
     if base_paths is None:
+        return [str(path) for path in find_shared_sessions()]
+    if base_paths is None:
         base_paths = [
             Path.home() / ".openclaw" / "agents" / "main" / "sessions",
             Path.home() / ".openclaw" / "agents" / "sub" / "sessions",
@@ -43,6 +46,9 @@ def find_sessions(base_paths=None):
 
 def parse_session_file(path):
     """Yield (timestamp, model, usage_dict) for each assistant message."""
+    yield from parse_shared_session(path)
+    return
+    # Kept below only as a reference for old session formats.
     open_fn = gzip.open if path.endswith(".gz") else open
     try:
         with open_fn(path, "rt", encoding="utf-8", errors="replace") as f:
@@ -187,11 +193,12 @@ def aggregate_by_cron(sessions, since=None, until=None):
 
 def estimate_cost(usage, model, pricing):
     """Estimate cost in USD. Prices are per 1M tokens."""
+    model = normalize_model(model)
     p = pricing.get(model)
     if p is None and "/" not in model:
         p = pricing.get(f"kimi/{model}")
     if p is None:
-        p = {}
+        return 0.0
     cost = 0.0
     cost += usage.get("input", 0) * (p.get("input") or 0) / 1e6
     cost += usage.get("output", 0) * (p.get("output") or 0) / 1e6
@@ -208,9 +215,9 @@ def format_report(by_day, by_session, pricing=None, costs=False):
         day_total = {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0, "messages": 0, "cost": 0.0}
         for model in sorted(by_day[day].keys()):
             u = by_day[day][model]
-            usage_for_cost = {"input": u["input"], "output": u["output"], "cacheRead": 0, "cacheWrite": 0}
+            usage_for_cost = {"input": u["input"], "output": u["output"], "cacheRead": u["cacheRead"], "cacheWrite": u["cacheWrite"]}
             c = estimate_cost(usage_for_cost, model, pricing) if (costs and pricing) else 0.0
-            lines.append(f"  {model:30s}  in={u['input']:>10,}  out={u['output']:>8,}  msgs={u['messages']:>4}")
+            lines.append(f"  {model:30s}  in={u['input']:>10,}  out={u['output']:>8,}  cache={u['cacheRead']:>8,}  msgs={u['messages']:>4}")
             if costs and pricing:
                 lines.append(f"{'':34s}est. ${c:.4f}")
             for k in ["input", "output", "cacheRead", "cacheWrite", "messages"]:
@@ -288,7 +295,7 @@ def to_json(by_day, by_session, pricing=None):
         for model, u in models.items():
             d = dict(u)
             if pricing:
-                usage_for_cost = {"input": u["input"], "output": u["output"], "cacheRead": 0, "cacheWrite": 0}
+                usage_for_cost = {"input": u["input"], "output": u["output"], "cacheRead": u["cacheRead"], "cacheWrite": u["cacheWrite"]}
                 d["estimated_cost_usd"] = round(estimate_cost(usage_for_cost, model, pricing), 6)
             out["days"][day][model] = d
     for sid, s in by_session.items():

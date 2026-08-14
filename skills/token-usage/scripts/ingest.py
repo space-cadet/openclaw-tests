@@ -13,6 +13,7 @@ import re
 from pathlib import Path
 from datetime import datetime, timezone
 from collections import defaultdict
+from common import find_sessions as find_shared_sessions, parse_session as parse_shared_session, normalize_model, estimate_cost as estimate_shared_cost
 
 DB_PATH = Path(__file__).parent / "usage.db"
 SESSION_PATHS = [
@@ -76,12 +77,7 @@ def load_pricing():
 
 
 def find_sessions():
-    sessions = []
-    for sp in SESSION_PATHS:
-        if sp.exists():
-            sessions.extend(sp.glob("*.jsonl"))
-            sessions.extend(sp.glob("*.jsonl.gz"))
-    return sorted(set(sessions))
+    return find_shared_sessions()
 
 
 def classify_session(path):
@@ -129,38 +125,13 @@ def classify_session(path):
 def parse_session(path):
     """Yield (date, model, usage_dict, job_type) for each assistant message."""
     job_type = classify_session(path)
-    open_fn = gzip.open if str(path).endswith(".gz") else open
-    with open_fn(path, "rt", encoding="utf-8", errors="replace") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                msg = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if msg.get("type") != "message":
-                continue
-            m = msg.get("message", {})
-            if m.get("role") != "assistant":
-                continue
-            usage = m.get("usage") or msg.get("usage")
-            if not usage:
-                continue
-            ts = msg.get("timestamp", "")
-            date = ts[:10] if ts else "unknown"
-            model = m.get("model", msg.get("model", msg.get("api", "unknown")))
-            yield date, model, usage, job_type
+    for ts, model, usage in parse_shared_session(path):
+        date = ts[:10] if ts else "unknown"
+        yield date, model, usage, job_type
 
 
 def estimate_cost(usage, model, pricing):
-    p = pricing.get(model, pricing.get("kimi/k2.7", {}))
-    cost = 0.0
-    cost += usage.get("input", 0) * p.get("input", 0) / 1e6
-    cost += usage.get("output", 0) * p.get("output", 0) / 1e6
-    cost += usage.get("cacheRead", 0) * p.get("cache_read", 0) / 1e6
-    cost += usage.get("cacheWrite", 0) * p.get("cache_write", 0) / 1e6
-    return cost
+    return shared_cost if (shared_cost := estimate_shared_cost(usage, normalize_model(model), pricing)) is not None else 0.0
 
 
 def ingest(sessions, db_path, pricing):
