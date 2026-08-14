@@ -12,7 +12,7 @@ from pathlib import Path
 from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 import glob
-from common import find_sessions as find_shared_sessions, parse_session as parse_shared_session, normalize_model
+from common import find_sessions as find_shared_sessions, parse_session as parse_shared_session, normalize_model, local_timestamp, local_date
 
 DEFAULT_PRICING = {
     "kimi/k2.7": {"input": 0.50, "output": 2.00, "cache_read": 0.10, "cache_write": 1.00},
@@ -101,11 +101,12 @@ def aggregate(sessions, since=None, until=None):
     for spath in sessions:
         sid = Path(spath).stem
         for ts, model, usage in parse_session_file(spath):
-            if since and ts < since:
+            local_ts = local_timestamp(ts)
+            if since and local_ts < since:
                 continue
-            if until and ts > until:
+            if until and local_ts >= until:
                 continue
-            day = ts[:10] if ts else "unknown"
+            day = local_date(ts)
             model_key = model or "unknown"
             
             inp = usage.get("input", 0)
@@ -173,11 +174,12 @@ def aggregate_by_cron(sessions, since=None, until=None):
         if not job_id:
             continue
         for ts, model, usage in parse_session_file(spath):
-            if since and ts < since:
+            local_ts = local_timestamp(ts)
+            if since and local_ts < since:
                 continue
-            if until and ts > until:
+            if until and local_ts >= until:
                 continue
-            day = ts[:10] if ts else "unknown"
+            day = local_date(ts)
             key = f"{day}:{job_id}"
             
             inp = usage.get("input", 0)
@@ -337,13 +339,31 @@ def main():
     parser.add_argument("--costs", action="store_true", help="Estimate costs")
     parser.add_argument("--json", action="store_true", help="Output JSON")
     parser.add_argument("--sessions", nargs="*", help="Specific session files")
+    parser.add_argument("--hours", type=float, help="Rolling window in hours")
+    parser.add_argument("--days", type=int, help="Rolling window in calendar days")
+    parser.add_argument("--since", help="Start time (ISO date/time or relative, e.g. 2h)")
+    parser.add_argument("--until", help="End time (ISO date/time or relative, e.g. 1h)")
+    parser.add_argument("--cache", action="store_true", help="Include cache columns in text output")
+    parser.add_argument("--session-detail", action="store_true", help="Include per-session totals in text output")
     args = parser.parse_args()
     
     now = datetime.now(LOCAL_TZ)
     since = None
     until = None
     
-    if args.today:
+    if args.hours is not None:
+        since = (now - timedelta(hours=args.hours)).replace(tzinfo=None).isoformat(timespec="seconds")
+    elif args.days is not None:
+        since = (now - timedelta(days=args.days)).replace(tzinfo=None).isoformat(timespec="seconds")
+    elif args.since:
+        if args.since.endswith(("m", "h", "d")):
+            amount = float(args.since[:-1])
+            unit = args.since[-1]
+            delta = timedelta(minutes=amount) if unit == "m" else timedelta(hours=amount) if unit == "h" else timedelta(days=amount)
+            since = (now - delta).replace(tzinfo=None).isoformat(timespec="seconds")
+        else:
+            since = args.since
+    elif args.today:
         since = now.strftime("%Y-%m-%dT00:00:00")
     elif args.yesterday:
         yesterday = now - timedelta(days=1)
@@ -355,6 +375,14 @@ def main():
         args.today = True
         since = now.strftime("%Y-%m-%dT00:00:00")
     
+    if args.until:
+        if args.until.endswith(("m", "h", "d")):
+            amount = float(args.until[:-1])
+            unit = args.until[-1]
+            delta = timedelta(minutes=amount) if unit == "m" else timedelta(hours=amount) if unit == "h" else timedelta(days=amount)
+            until = (now - delta).replace(tzinfo=None).isoformat(timespec="seconds")
+        else:
+            until = args.until
     sessions = args.sessions or find_sessions()
     if not sessions:
         print("No session files found.")
@@ -374,6 +402,11 @@ def main():
             print(json.dumps(to_json(by_day, by_session, pricing), indent=2))
         else:
             print(format_report(by_day, by_session, pricing, args.costs))
+            if args.session_detail:
+                print("\n## Sessions")
+                for session_id, data in sorted(by_session.items()):
+                    models = ", ".join(sorted(data["models"]))
+                    print(f"  {session_id}: in={data['input']:,} out={data['output']:,} cache={data['cacheRead']:,} models={models}")
 
 if __name__ == "__main__":
     main()

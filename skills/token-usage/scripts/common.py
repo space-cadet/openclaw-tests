@@ -4,8 +4,10 @@ import gzip
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 LOCAL_TZ_NAME = "Asia/Calcutta"
+LOCAL_TZ = ZoneInfo(LOCAL_TZ_NAME)
 
 
 def normalize_model(model):
@@ -13,6 +15,24 @@ def normalize_model(model):
     value = (model or "unknown").strip().lower()
     aliases = {"k2.6": "kimi/k2.6", "k2.7": "kimi/k2.7", "k3": "kimi/k3"}
     return aliases.get(value, value)
+
+
+def local_timestamp(timestamp):
+    """Return a timestamp in local time for grouping and filtering."""
+    if not timestamp:
+        return ""
+    try:
+        value = timestamp.replace("Z", "+00:00")
+        parsed = datetime.fromisoformat(value)
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(LOCAL_TZ).replace(tzinfo=None).isoformat(timespec="seconds")
+    except ValueError:
+        return timestamp
+
+
+def local_date(timestamp):
+    return local_timestamp(timestamp)[:10] if timestamp else "unknown"
 
 
 def find_sessions():

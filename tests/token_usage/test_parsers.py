@@ -1,13 +1,14 @@
 import json
 import tempfile
 import unittest
+import gzip
 from pathlib import Path
 import sys
 
 SCRIPT_DIR = Path(__file__).parents[2] / "skills" / "token-usage" / "scripts"
 sys.path.insert(0, str(SCRIPT_DIR))
 
-from common import parse_session
+from common import parse_session, local_date
 
 
 class ParserTests(unittest.TestCase):
@@ -43,6 +44,20 @@ class ParserTests(unittest.TestCase):
             rows = list(parse_session(path))
             self.assertEqual(rows[0][1], "gpt-5.6-luna")
             self.assertEqual(rows[0][2]["cacheRead"], 8)
+        finally:
+            path.unlink()
+
+    def test_gzip_and_local_date(self):
+        path = Path(tempfile.mktemp(suffix=".jsonl.gz"))
+        record = {"type": "message", "timestamp": "2026-08-13T18:45:00Z", "message": {
+            "role": "assistant", "model": "claude-sonnet-4-5", "usage": {"input": 3, "output": 2}
+        }}
+        with gzip.open(path, "wt", encoding="utf-8") as stream:
+            stream.write(json.dumps(record) + "\n")
+        try:
+            rows = list(parse_session(path))
+            self.assertEqual(rows[0][1], "claude-sonnet-4-5")
+            self.assertEqual(local_date(record["timestamp"]), "2026-08-14")
         finally:
             path.unlink()
 

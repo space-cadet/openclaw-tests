@@ -60,4 +60,4 @@ Compare direct and SQLite totals for every fixture.
 - Added tests for an OpenClaw record and a Codex record.
 - Confirmed the earlier Luna session still totals 214,888 new tokens.
 
-Still open: local-day conversion, SQLite cache/report checks, rolling-window flags, cron pricing, and more provider fixtures.
+Still open: cron pricing, full direct/SQLite comparison tests, and more provider fixtures.

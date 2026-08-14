@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 from datetime import datetime, timezone
 from collections import defaultdict
-from common import find_sessions as find_shared_sessions, parse_session as parse_shared_session, normalize_model, estimate_cost as estimate_shared_cost
+from common import find_sessions as find_shared_sessions, parse_session as parse_shared_session, normalize_model, estimate_cost as estimate_shared_cost, local_date
 
 DB_PATH = Path(__file__).parent / "usage.db"
 SESSION_PATHS = [
@@ -126,7 +126,7 @@ def parse_session(path):
     """Yield (date, model, usage_dict, job_type) for each assistant message."""
     job_type = classify_session(path)
     for ts, model, usage in parse_shared_session(path):
-        date = ts[:10] if ts else "unknown"
+        date = local_date(ts)
         yield date, model, usage, job_type
 
 
