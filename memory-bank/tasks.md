@@ -185,7 +185,7 @@ The `mb-text-workflow` skill had a critical flaw: it defaulted to workspace memo
 - `skills/mem-format/SKILL.md` — Template compliance validation
 - `skills/mem-load/SKILL.md` — Context loading utility
 
-## T10: Make token-usage tracking consistent across providers ⏸️ BLOCKED (2026-08-14)
+## T10: Make token-usage tracking consistent across providers 🔄 IN PROGRESS (2026-08-14)
 - [ ] Move OpenClaw and Codex parsing into one shared module
 - [ ] Make SQLite ingestion use the shared parser
 - [ ] Fix cache accounting and unknown-model pricing

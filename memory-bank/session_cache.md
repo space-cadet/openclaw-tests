@@ -51,3 +51,8 @@ No code changes are planned beyond the token-usage skill. Keep notes short and c
 - T10 code work complete; commit `0371753` is pushed.
 - ClawHub publish remains pending because the CLI could not be installed in the current npm setup.
 - Memory-bank updated in simple language.
+
+## 2026-08-14 18:20 IST
+
+- ClawHub accepted `token-usage@2.4.0` for publication.
+- Publication is pending review; latest remains 2.3.0 for now.

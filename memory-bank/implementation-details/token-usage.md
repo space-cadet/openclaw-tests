@@ -75,4 +75,4 @@ It now has:
 
 ClawHub publishing was attempted but could not start. The local npm setup tried to install into `/Users/deepak`, which Sage cannot write. A temporary user-local attempt also failed because the npm prefix directory did not exist. No repository files were changed by these attempts.
 
-Next step: publish `token-usage` version 2.4.0 from a working ClawHub CLI environment, then verify the live version.
+ClawHub accepted version 2.4.0 for publication. Its version record is `k970jkrargkvx1vyvmcpb11bns8cfhrb`, and its publication state is `pending`. The live latest tag still says 2.3.0 until review finishes.

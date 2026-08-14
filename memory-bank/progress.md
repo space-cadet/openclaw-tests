@@ -17,7 +17,7 @@
 ### T10 release (2026-08-14)
 - Completed the v2.4.0 code block: shared parsing, Codex SQLite support, local dates, rolling windows, cache-aware reports, safe pricing, and comparison tests.
 - Pushed commit `0371753`.
-- ClawHub publishing is pending because the local CLI could not be installed safely.
+- ClawHub accepted v2.4.0 for publication. It is pending review; latest remains 2.3.0 until the review finishes.
 
 ## Completed (2026-07-27)
 
