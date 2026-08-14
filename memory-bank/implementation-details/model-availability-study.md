@@ -106,6 +106,12 @@ The direct OS scheduler is not itself managed by `openclaw cron`; its installati
 
 Primary response: first-attempt failure probability by provider/model/harness and time bin. Keep rate limits separate from service outages. Include date, weekday, probe profile, and network-control observations as covariates. Report confidence intervals and sample counts; do not label sparse bins as findings. Analyse declared incidents separately rather than silently excluding them.
 
+## Current implementation
+
+`scripts/model-availability-batch.py` is the first implementation. The managed OpenClaw command cron `availability-probe-openclaw` invokes it every five minutes with delivery disabled. The runner uses a plain-text next-run gate and chooses a uniform random delay from 5--20 minutes after each completed batch. A lock prevents overlapping batches. Current targets are `kimi/k2.7`, `kimi/k2.7-code`, `kimi/k3`, `kimi/k3-1m`, and the separately labelled reference `deepseek/deepseek-v4-flash`.
+
+The runner invokes `openclaw agent` with model overrides and dedicated isolated session keys, never with `--deliver`. It records prompt hash, provider/model, harness outcome, latency, token usage, cache usage, stop reason, fallback status, and error classification in local JSONL. Runtime logs and the next-run gate are intentionally not committed.
+
 ## Decisions still required
 
 - Provider endpoint/adapters and exact model IDs.
