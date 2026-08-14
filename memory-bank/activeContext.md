@@ -1,10 +1,12 @@
 # Active Context: openclaw-tools
 
-## Current Focus: T11 Provider/model availability study design (2026-08-15)
+## Current Focus: T11 Provider/model availability study (2026-08-15)
 
 T11 is in planning. The design separates a direct provider probe from an optional OpenClaw-mediated harness, records every attempt in provider/model-agnostic JSONL, suppresses per-call notifications, and reserves hourly/four-hourly aggregate reports for user-facing delivery. It follows the existing cron-management maintenance flag and naming conventions.
 
 T10 remains complete in code; ClawHub review remains pending.
+
+The silent `availability-probe-openclaw` command cron is enabled and managed through `cronctl`. The reusable runner is pushed in `bd566ee`; local JSONL runtime data is intentionally untracked. T11 remains active for aggregate reporting and DeepSeek reference diagnosis.
 
 The v2.4.0 code block is complete and pushed in commit `0371753`. ClawHub accepted the release for publication, but it is still pending review. The live latest tag remains 2.3.0 for now.
 

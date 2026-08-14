@@ -196,3 +196,16 @@ For persistent maintenance mode across reboots, use `/var/run/cron-paused` or a 
 - [ ] Config file: `~/.config/cronctl/config.json` for default settings
 - [ ] Persistent maintenance mode across reboots via systemd
 - [ ] Integration with Healthchecks.io for external monitoring
+
+## Availability Study Integration
+
+The provider/model availability study uses the existing management contract:
+
+- Job name: `availability-probe-openclaw`
+- Kind: silent OpenClaw command job
+- Schedule: every 5 minutes, with the runner enforcing a random 5--20 minute gate between batches
+- Delivery: disabled (`mode: none`); individual probe outcomes never notify Telegram
+- Pause behavior: the runner checks `/tmp/cron-paused` before network calls and records maintenance skips locally
+- Health control: `cronctl list`, `cronctl pause availability-probe-openclaw`, `cronctl resume availability-probe-openclaw`, and `cronctl health availability-probe-openclaw`
+
+The runner is implemented in `scripts/model-availability-batch.py`. It writes local JSONL runtime data and uses a lock to prevent overlapping batches. Aggregate reporting jobs are intentionally separate and may opt into user-facing delivery.

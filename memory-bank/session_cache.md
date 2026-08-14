@@ -57,6 +57,12 @@ No code changes are planned beyond the token-usage skill. Keep notes short and c
 - ClawHub accepted `token-usage@2.4.0` for publication.
 - Publication is pending review; latest remains 2.3.0 for now.
 
+## 2026-08-15 02:15 IST
+
+- T11 availability-study runner implemented and enabled as `availability-probe-openclaw`.
+- Four Kimi models succeeded in the verified OpenClaw-harness batch; DeepSeek flash reference failed.
+- Session ending with T11 active for aggregate reports and DeepSeek diagnosis.
+
 ### T11: Provider/model availability study harness
 **Status:** 🔄 IN PROGRESS
 **Priority:** MEDIUM
