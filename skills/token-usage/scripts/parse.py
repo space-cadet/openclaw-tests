@@ -166,7 +166,7 @@ def detect_cron_job(path):
 def aggregate_by_cron(sessions, since=None, until=None):
     """Aggregate token usage by cron job and date."""
     by_day_job = defaultdict(lambda: {
-        "input": 0, "output": 0, "messages": 0, "name": ""
+        "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0, "messages": 0, "name": "", "models": {}
     })
     
     for spath in sessions:
@@ -184,10 +184,20 @@ def aggregate_by_cron(sessions, since=None, until=None):
             
             inp = usage.get("input", 0)
             out = usage.get("output", 0)
+            cache_read = usage.get("cacheRead", 0)
+            cache_write = usage.get("cacheWrite", 0)
+            model_key = normalize_model(model)
             
             by_day_job[key]["input"] += inp
             by_day_job[key]["output"] += out
+            by_day_job[key]["cacheRead"] += cache_read
+            by_day_job[key]["cacheWrite"] += cache_write
             by_day_job[key]["messages"] += 1
+            model_data = by_day_job[key]["models"].setdefault(model_key, {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0})
+            model_data["input"] += inp
+            model_data["output"] += out
+            model_data["cacheRead"] += cache_read
+            model_data["cacheWrite"] += cache_write
             if job_name and not by_day_job[key]["name"]:
                 by_day_job[key]["name"] = job_name
     
@@ -261,10 +271,12 @@ def format_cron_report(by_day_job, pricing=None, costs=False):
             if len(name) > 28:
                 name = name[:25] + "..."
             
-            usage_for_cost = {"input": data["input"], "output": data["output"], "cacheRead": 0, "cacheWrite": 0}
-            c = estimate_cost(usage_for_cost, "kimi/k2.7", pricing) if (costs and pricing) else 0.0
+            c = 0.0
+            if costs and pricing:
+                for model, usage in data.get("models", {}).items():
+                    c += estimate_cost(usage, model, pricing)
             
-            lines.append(f"  {name:<28}  calls={data['messages']:>4}  in={data['input']:>10,}  out={data['output']:>8,}")
+            lines.append(f"  {name:<28}  calls={data['messages']:>4}  in={data['input']:>10,}  out={data['output']:>8,}  cache={data['cacheRead'] + data['cacheWrite']:>8,}")
             if costs and pricing:
                 lines.append(f"{'':34s}est. ${c:.4f}")
             
@@ -322,9 +334,10 @@ def to_cron_json(by_day_job, pricing=None):
             "output": data["output"],
             "messages": data["messages"]
         }
+        d["cacheRead"] = data.get("cacheRead", 0)
+        d["cacheWrite"] = data.get("cacheWrite", 0)
         if pricing:
-            usage_for_cost = {"input": data["input"], "output": data["output"], "cacheRead": 0, "cacheWrite": 0}
-            d["estimated_cost_usd"] = round(estimate_cost(usage_for_cost, "kimi/k2.7", pricing), 6)
+            d["estimated_cost_usd"] = round(sum(estimate_cost(usage, model, pricing) for model, usage in data.get("models", {}).items()), 6)
         out["days"][day][job_id] = d
     return out
 

@@ -24,7 +24,7 @@
 **Status:** 🔄 IN PROGRESS
 **Priority:** HIGH
 **Started:** 2026-08-14 17:35:37 IST
-**Last Active:** 2026-08-14 18:24:00 IST
+**Last Active:** 2026-08-14 18:28:00 IST
 **Dependencies:** T5
 
 #### Context
@@ -40,7 +40,8 @@ The direct parser supports more formats than the SQLite importer. The two paths 
 2. ✅ Recorded the gaps.
 3. ✅ Built the shared parser and tests.
 4. ✅ Finished date handling, CLI flags, and cache totals.
-5. 🔄 Finish cron pricing and full comparison tests.
+5. ✅ Finished model-aware cron pricing.
+6. 🔄 Finish full comparison tests and release cleanup.
 
 #### Working State
 No code changes are planned beyond the token-usage skill. Keep notes short and clear.
