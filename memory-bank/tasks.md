@@ -193,3 +193,10 @@ The `mb-text-workflow` skill had a critical flaw: it defaulted to workspace memo
 - [x] Add parser fixtures and tests
 - [x] Submit v2.4.0 to ClawHub; review is pending
 - See [T10 details](tasks/T10.md)
+
+## T11: Provider/model availability study harness 🔄 IN PROGRESS (2026-08-15)
+- [ ] Define provider/model-agnostic probe and JSONL event contract
+- [ ] Specify direct and OpenClaw harness modes
+- [ ] Specify silent measurement and hourly/4-hourly reporting schedules
+- [ ] Integrate cron-management maintenance and naming conventions
+- See [T11 details](tasks/T11.md)

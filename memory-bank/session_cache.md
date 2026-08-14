@@ -5,11 +5,11 @@
 
 ## Current Session
 **Started**: 2026-08-14 17:35:37 IST
-**Focus Task**: T10 - Make token-usage tracking consistent across providers
+**Focus Task**: T11 - Provider/model availability study harness
 **Session File**: `sessions/2026-08-14-evening.md`
 
 ## Overview
-- Active Tasks: 1
+- Active Tasks: 2
 - Paused Tasks: 0
 - Last Session: `sessions/2026-08-14-evening.md`
 - Current Period: evening
@@ -56,3 +56,17 @@ No code changes are planned beyond the token-usage skill. Keep notes short and c
 
 - ClawHub accepted `token-usage@2.4.0` for publication.
 - Publication is pending review; latest remains 2.3.0 for now.
+
+### T11: Provider/model availability study harness
+**Status:** 🔄 IN PROGRESS
+**Priority:** MEDIUM
+**Started:** 2026-08-15 01:32:26 IST
+**Last Active:** 2026-08-15 01:32:26 IST
+
+#### Context
+Planning a provider/model-agnostic availability study with direct and optional OpenClaw harness modes. Measurement jobs are silent and append one event per attempt to JSONL; hourly and four-hourly reports may notify the user.
+
+#### Progress
+1. ✅ Checked the existing cron-management skill and maintenance contract.
+2. ✅ Created T11 task and implementation design.
+3. ⏸️ Waiting for protocol choices before implementing probes or schedules.
