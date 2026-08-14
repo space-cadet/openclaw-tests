@@ -61,3 +61,18 @@ Compare direct and SQLite totals for every fixture.
 - Confirmed the earlier Luna session still totals 214,888 new tokens.
 
 The main code block is ready for v2.4.0. ClawHub publishing remains after final review.
+## v2.4.0 status (2026-08-14)
+
+The code work for this block is complete and is in commit `0371753`.
+
+It now has:
+- one parser for OpenClaw and Codex records;
+- provider and model handling for OpenAI, Claude, Kimi, and other known models;
+- safe handling for unknown models;
+- cache-aware direct, SQLite, and cron reports;
+- local-day grouping and rolling-window flags;
+- tests comparing direct and SQLite totals.
+
+ClawHub publishing was attempted but could not start. The local npm setup tried to install into `/Users/deepak`, which Sage cannot write. A temporary user-local attempt also failed because the npm prefix directory did not exist. No repository files were changed by these attempts.
+
+Next step: publish `token-usage` version 2.4.0 from a working ClawHub CLI environment, then verify the live version.

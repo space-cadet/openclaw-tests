@@ -46,3 +46,8 @@ The direct parser supports more formats than the SQLite importer. The two paths 
 
 #### Working State
 No code changes are planned beyond the token-usage skill. Keep notes short and clear.
+## 2026-08-14 18:30 IST
+
+- T10 code work complete; commit `0371753` is pushed.
+- ClawHub publish remains pending because the CLI could not be installed in the current npm setup.
+- Memory-bank updated in simple language.

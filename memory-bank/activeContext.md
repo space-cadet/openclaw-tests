@@ -2,6 +2,8 @@
 
 ## Current Focus: T10 Token-usage consistency (2026-08-14)
 
+The v2.4.0 code block is complete and pushed in commit `0371753`. ClawHub publishing is the only open item. It was blocked because the local npm setup points to another user's Node installation.
+
 The direct parser now reads Codex rollout files, but the SQLite importer does not. The two paths also handle prices, cache tokens, aliases, and dates differently. T10 tracks the cleanup.
 
 Use simple language in notes. The next code step is a shared parser used by both paths, followed by small tests.
