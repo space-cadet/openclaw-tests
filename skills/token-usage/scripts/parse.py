@@ -32,12 +32,13 @@ def find_sessions(base_paths=None):
         base_paths = [
             Path.home() / ".openclaw" / "agents" / "main" / "sessions",
             Path.home() / ".openclaw" / "agents" / "sub" / "sessions",
+            Path.home() / ".openclaw" / "agents" / "main" / "agent" / "codex-home" / "sessions",
         ]
     sessions = []
     for bp in base_paths:
         if bp.exists():
-            sessions.extend(glob.glob(str(bp / "*.jsonl")))
-            sessions.extend(glob.glob(str(bp / "*.jsonl.gz")))
+            sessions.extend(glob.glob(str(bp / "**" / "*.jsonl"), recursive=True))
+            sessions.extend(glob.glob(str(bp / "**" / "*.jsonl.gz"), recursive=True))
     return sorted(set(sessions))
 
 def parse_session_file(path):
@@ -45,6 +46,7 @@ def parse_session_file(path):
     open_fn = gzip.open if path.endswith(".gz") else open
     try:
         with open_fn(path, "rt", encoding="utf-8", errors="replace") as f:
+            codex_model = ""
             for line in f:
                 line = line.strip()
                 if not line:
@@ -52,6 +54,21 @@ def parse_session_file(path):
                 try:
                     msg = json.loads(line)
                 except json.JSONDecodeError:
+                    continue
+                if msg.get("type") == "event_msg":
+                    payload = msg.get("payload", {})
+                    if payload.get("type") == "token_count":
+                        usage = (payload.get("info", {}).get("last_token_usage") or {})
+                        if usage:
+                            yield msg.get("timestamp", ""), codex_model or "openai/gpt-5.6-luna", {
+                                "input": usage.get("input_tokens", 0),
+                                "output": usage.get("output_tokens", 0),
+                                "cacheRead": usage.get("cached_input_tokens", 0),
+                                "cacheWrite": usage.get("cache_write_input_tokens", 0),
+                            }
+                    continue
+                if msg.get("type") == "turn_context":
+                    codex_model = msg.get("payload", {}).get("model", "") or codex_model
                     continue
                 if msg.get("type") != "message":
                     continue
@@ -69,10 +86,10 @@ def parse_session_file(path):
 
 def aggregate(sessions, since=None, until=None):
     by_day = defaultdict(lambda: defaultdict(lambda: {
-        "input": 0, "output": 0, "messages": 0
+        "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0, "messages": 0
     }))
     by_session = defaultdict(lambda: {
-        "input": 0, "output": 0, "messages": 0, "models": set()
+        "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0, "messages": 0, "models": set()
     })
     
     for spath in sessions:
@@ -91,11 +108,15 @@ def aggregate(sessions, since=None, until=None):
             d = by_day[day][model_key]
             d["input"] += inp
             d["output"] += out
+            d["cacheRead"] += usage.get("cacheRead", 0)
+            d["cacheWrite"] += usage.get("cacheWrite", 0)
             d["messages"] += 1
             
             s = by_session[sid]
             s["input"] += inp
             s["output"] += out
+            s["cacheRead"] += usage.get("cacheRead", 0)
+            s["cacheWrite"] += usage.get("cacheWrite", 0)
             s["messages"] += 1
             s["models"].add(model_key)
     
@@ -170,7 +191,7 @@ def estimate_cost(usage, model, pricing):
     if p is None and "/" not in model:
         p = pricing.get(f"kimi/{model}")
     if p is None:
-        p = pricing.get("kimi/k2.7", {})
+        p = {}
     cost = 0.0
     cost += usage.get("input", 0) * (p.get("input") or 0) / 1e6
     cost += usage.get("output", 0) * (p.get("output") or 0) / 1e6
@@ -180,11 +201,11 @@ def estimate_cost(usage, model, pricing):
 
 def format_report(by_day, by_session, pricing=None, costs=False):
     lines = []
-    total = {"input": 0, "output": 0, "messages": 0, "cost": 0.0}
+    total = {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0, "messages": 0, "cost": 0.0}
     
     for day in sorted(by_day.keys(), reverse=True):
         lines.append(f"\n## {day}")
-        day_total = {"input": 0, "output": 0, "messages": 0, "cost": 0.0}
+        day_total = {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0, "messages": 0, "cost": 0.0}
         for model in sorted(by_day[day].keys()):
             u = by_day[day][model]
             usage_for_cost = {"input": u["input"], "output": u["output"], "cacheRead": 0, "cacheWrite": 0}
@@ -192,10 +213,10 @@ def format_report(by_day, by_session, pricing=None, costs=False):
             lines.append(f"  {model:30s}  in={u['input']:>10,}  out={u['output']:>8,}  msgs={u['messages']:>4}")
             if costs and pricing:
                 lines.append(f"{'':34s}est. ${c:.4f}")
-            for k in ["input", "output", "messages"]:
+            for k in ["input", "output", "cacheRead", "cacheWrite", "messages"]:
                 day_total[k] += u[k]
             day_total["cost"] += c
-            for k in ["input", "output", "messages"]:
+            for k in ["input", "output", "cacheRead", "cacheWrite", "messages"]:
                 total[k] += u[k]
             total["cost"] += c
         lines.append(f"  {'Day total':30s}  in={day_total['input']:>10,}  out={day_total['output']:>8,}  msgs={day_total['messages']:>4}")
@@ -272,7 +293,7 @@ def to_json(by_day, by_session, pricing=None):
             out["days"][day][model] = d
     for sid, s in by_session.items():
         out["sessions"][sid] = {
-            **{k: s[k] for k in ["input", "output", "messages"]},
+            **{k: s[k] for k in ["input", "output", "cacheRead", "cacheWrite", "messages"]},
             "models": list(s["models"])
         }
     return out

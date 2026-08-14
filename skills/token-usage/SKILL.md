@@ -8,7 +8,7 @@ version: "2.3.0"
 
 # Token Usage Tracker
 
-Parse OpenClaw session JSONL files to extract token usage, aggregate by date/model/session, and generate cost reports.
+Parse OpenClaw and Codex session JSONL files to extract token usage, aggregate by date/model/session, and generate provider-aware cost reports.
 
 ## When to Use
 
@@ -19,8 +19,8 @@ Parse OpenClaw session JSONL files to extract token usage, aggregate by date/mod
 
 ## Workflow
 
-1. **Locate sessions** — Find `.jsonl` files in `~/.openclaw/agents/*/sessions/`
-2. **Parse usage** — Extract `input`, `output`, `cacheRead`, `cacheWrite`, `totalTokens` from each assistant message
+1. **Locate sessions** — Find `.jsonl` files in OpenClaw agent sessions and nested Codex rollout sessions
+2. **Parse usage** — Extract OpenClaw message usage or Codex `token_count` per-turn usage
 3. **Aggregate** — Group by date, model, session ID
 4. **Report** — Output summaries, trends, cost estimates
 
@@ -149,9 +149,17 @@ The `totalTokens` field in session files includes `cacheRead` (cached context wi
 - Weekly reports: `~/.openclaw/skills/token-usage/logs/week-YYYY-Www.md`
 - Raw JSON exports: user-specified or `/tmp/token-usage-*.json`
 
+## Supported formats and providers
+
+- OpenClaw assistant message records (`message.usage` or top-level `usage`)
+- Codex rollout records (`event_msg` → `token_count` → `last_token_usage`)
+- Kimi, OpenAI/GPT, Anthropic/Claude, and OpenRouter model pricing from `scripts/pricing.json`
+- Unknown models are reported without silently using Kimi pricing
+- New usage is `input + output`; cached input is reported separately
+
 ## Limitations
 
-- Only parses assistant messages with `usage` fields (OpenClaw 2026.5+ format)
+- Provider-specific logs not matching the supported JSONL schemas are not parsed
 - Historical sessions before JSONL format not supported
 - Costs are estimates; actual billing may differ
 - With many session files (7000+), first run may take 10-30 seconds; subsequent runs with `--since` are fast due to mtime filtering
