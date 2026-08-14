@@ -1,5 +1,11 @@
 # Active Context: openclaw-tools
 
+## Current Focus: T10 Token-usage consistency (2026-08-14)
+
+The direct parser now reads Codex rollout files, but the SQLite importer does not. The two paths also handle prices, cache tokens, aliases, and dates differently. T10 tracks the cleanup.
+
+Use simple language in notes. The next code step is a shared parser used by both paths, followed by small tests.
+
 ## Current Status: Token-Usage v2.3.0 Published (2026-07-27)
 
 ### What Just Happened (2026-07-28)

@@ -1,5 +1,13 @@
 # Progress: openclaw-tools Reorganization
 
+## In Progress (2026-08-14)
+
+### T10: Token-usage consistency across providers
+- Audited the direct parser, SQLite importer, reports, pricing updater, and docs.
+- Found that direct parsing and SQLite ingestion do not support the same session formats.
+- Recorded the plan in `tasks/T10.md` and `implementation-details/token-usage.md`.
+- Next: build one shared parser and add small tests.
+
 ## Completed (2026-07-27)
 
 ### Token-Usage v2.3.0: Timezone Fix, K3 Pricing, Model Aliases
