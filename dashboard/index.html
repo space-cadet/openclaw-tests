@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OpenClaw model availability and capability benchmark dashboard.">
+  <title>OpenClaw Results Dashboard</title>
+  <style>
+    :root { --bg:#0b1020; --panel:#121a2d; --panel-2:#18233b; --text:#e8edf7; --muted:#9aa8c2; --line:#293653; --cyan:#5eead4; --blue:#7aa2ff; --amber:#fbbf24; --red:#fb7185; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--text); background:radial-gradient(circle at 80% -10%,#24365d 0,transparent 40%),var(--bg); font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { max-width:1180px; margin:auto; padding:48px 22px 70px; }
+    h1,h2,h3,p { margin-top:0; } h1 { font-size:clamp(2.2rem,5vw,4.5rem); line-height:1; letter-spacing:-.06em; margin-bottom:18px; } h2 { font-size:1.45rem; margin-bottom:7px; } h3 { font-size:1rem; margin-bottom:4px; }
+    .eyebrow { color:var(--cyan); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.75rem; }
+    .lede { color:var(--muted); max-width:720px; font-size:1.08rem; }
+    .meta { color:var(--muted); font-size:.82rem; margin-top:24px; }
+    .section { margin-top:54px; } .section-head { display:flex; justify-content:space-between; gap:20px; align-items:end; margin-bottom:18px; } .section-head p { color:var(--muted); margin-bottom:0; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+    .card { background:color-mix(in srgb,var(--panel) 92%,transparent); border:1px solid var(--line); border-radius:18px; padding:20px; box-shadow:0 14px 35px #02061755; }
+    .metric { font-size:2rem; font-weight:750; letter-spacing:-.04em; margin:8px 0 1px; } .good { color:var(--cyan); } .warn { color:var(--amber); } .bad { color:var(--red); }
+    .sub { color:var(--muted); font-size:.84rem; } .tag { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:3px 9px; color:var(--muted); font-size:.75rem; }
+    .table-wrap { overflow:auto; border:1px solid var(--line); border-radius:18px; } table { border-collapse:collapse; width:100%; min-width:700px; background:var(--panel); } th,td { text-align:left; padding:13px 16px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.07em; } tr:last-child td { border-bottom:0; }
+    .bar { height:8px; background:#26324c; border-radius:99px; overflow:hidden; margin-top:9px; } .bar span { display:block; height:100%; background:linear-gradient(90deg,var(--blue),var(--cyan)); border-radius:inherit; }
+    .note { border-left:3px solid var(--amber); padding:12px 15px; color:var(--muted); background:#1b2235; border-radius:0 12px 12px 0; }
+    footer { color:var(--muted); font-size:.82rem; border-top:1px solid var(--line); margin-top:60px; padding-top:20px; }
+    @media (max-width:650px) { main { padding:32px 15px 50px; } .section-head { display:block; } .section-head p { margin-top:8px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">OpenClaw Tools · Results</div>
+    <h1>Model behavior,<br><span style="color:var(--cyan)">measured.</span></h1>
+    <p class="lede">A compact view of the repository’s operational availability probes and task-capability benchmarks. These are separate experiments: one measures whether a route responds, the other measures what a model can do.</p>
+    <p class="meta">Snapshot generated 16 Aug 2026 · Source repository: <code>space-cadet/openclaw-tools</code></p>
+  </header>
+
+  <section class="section">
+    <div class="section-head"><div><div class="eyebrow">01 · Availability</div><h2>OpenClaw route reliability</h2></div><p>Local JSONL snapshot · OpenClaw harness · Kimi targets</p></div>
+    <div class="grid">
+      <article class="card"><span class="tag">Most reliable</span><div class="metric good">97.4%</div><div class="sub">k2.7-code · 76 / 78 successful</div><div class="bar"><span style="width:97.4%"></span></div></article>
+      <article class="card"><span class="tag">Fastest typical</span><div class="metric good">9.9 s</div><div class="sub">k3 · median successful latency</div><div class="bar"><span style="width:76%"></span></div></article>
+      <article class="card"><span class="tag">DeepSeek reference</span><div class="metric bad">0 / 84</div><div class="sub">Configured route successes</div><div class="bar"><span style="width:2%;background:var(--red)"></span></div></article>
+      <article class="card"><span class="tag">Measurement design</span><div class="metric">5–20 min</div><div class="sub">Randomized batch spacing</div><div class="bar"><span style="width:50%;background:var(--amber)"></span></div></article>
+    </div>
+    <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>Model</th><th>Success</th><th>Rate</th><th>Median latency</th><th>Average latency</th><th>Interpretation</th></tr></thead><tbody>
+      <tr><td><strong>k2.7-code</strong></td><td>76 / 78</td><td class="good">97.4%</td><td>10.1 s</td><td>11.7 s</td><td>Best reliability</td></tr>
+      <tr><td><strong>k3</strong></td><td>72 / 76</td><td class="good">94.7%</td><td>9.9 s</td><td>11.7 s</td><td>Best typical speed</td></tr>
+      <tr><td><strong>k3-1m</strong></td><td>71 / 77</td><td>92.2%</td><td>9.6 s</td><td>12.0 s</td><td>Longer latency tail</td></tr>
+      <tr><td><strong>k2.7</strong></td><td>71 / 79</td><td class="warn">89.9%</td><td>10.3 s</td><td>13.4 s</td><td>Weakest in sample</td></tr>
+    </tbody></table></div>
+    <p class="note" style="margin-top:14px">Availability observations use the OpenClaw-mediated path. DeepSeek failures were mostly classified as harness errors, so this dashboard does not claim that the model itself is unavailable.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><div class="eyebrow">02 · Capability</div><h2>Task benchmark results</h2></div><p>Committed benchmark snapshot · progressive result set</p></div>
+    <div class="grid">
+      <article class="card"><span class="tag">deepseek-v4-pro</span><div class="metric good">100%</div><div class="sub">105 / 105 across 8 recorded tasks</div><div class="bar"><span style="width:100%"></span></div></article>
+      <article class="card"><span class="tag">k3</span><div class="metric good">100%</div><div class="sub">84 / 84 across 8 recorded tasks</div><div class="bar"><span style="width:100%"></span></div></article>
+      <article class="card"><span class="tag">deepseek-v4-flash</span><div class="metric">98.8%</div><div class="sub">82 / 83 across 8 recorded tasks</div><div class="bar"><span style="width:98.8%"></span></div></article>
+    </div>
+    <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>Task family</th><th>Models represented</th><th>What it measures</th><th>Source</th></tr></thead><tbody>
+      <tr><td>T1–T5</td><td>k3, DeepSeek Flash/Pro</td><td>Implementation tasks and tool-oriented coding</td><td><code>tests/model-benchmarks/results-progressive.json</code></td></tr>
+      <tr><td>C1–C3</td><td>k3, DeepSeek Flash/Pro</td><td>Constraint and completion challenges</td><td><code>tests/model-benchmarks/results-progressive.json</code></td></tr>
+      <tr><td>Mini LISP + subagents</td><td>K3, K2.7 Code, K2.6</td><td>Interpreter construction and orchestration behavior</td><td><code>kimi-benchmarks/k3/results.md</code></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><div class="eyebrow">03 · Reading the data</div><h2>What this does—and does not—say</h2></div></div>
+    <div class="grid">
+      <article class="card"><h3>Operational choice</h3><p class="sub">The current availability sample favors <strong style="color:var(--text)">k2.7-code</strong> for reliability and <strong style="color:var(--text)">k3</strong> for typical speed.</p></article>
+      <article class="card"><h3>Capability is separate</h3><p class="sub">A perfect task score does not imply better uptime, lower latency, or a healthier provider route.</p></article>
+      <article class="card"><h3>Next measurement</h3><p class="sub">Add aggregate reports and a direct-provider control before turning these observations into a durable policy.</p></article>
+    </div>
+  </section>
+
+  <footer>Data sources: <code>data/model-availability/runs.jsonl</code> (local runtime snapshot), <code>tests/model-benchmarks/</code>, and <code>kimi-benchmarks/</code>. The raw availability log is intentionally git-ignored.</footer>
+</main>
+</body>
+</html>

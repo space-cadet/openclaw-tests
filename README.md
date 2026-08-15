@@ -68,6 +68,14 @@ A public, shareable repository of OpenClaw skills, scripts, benchmarks, and util
 | `model-benchmarks` | Cross-model capability benchmarks |
 | `subagent-tests` | Subagent test harness and JSON test specs |
 
+## Results Dashboard
+
+The static [results dashboard](dashboard/index.html) presents the repository's
+availability snapshot and capability benchmark results in one page. It is
+self-contained for local preview and can later be copied into a website's
+`projects/` section. The raw availability log remains local and git-ignored;
+the dashboard uses a dated, redacted summary snapshot.
+
 ## Contributing
 
 1. Sanitize: No personal references, no specific paths, no secrets
