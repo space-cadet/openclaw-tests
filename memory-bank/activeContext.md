@@ -6,7 +6,7 @@ T11 is in planning. The design separates a direct provider probe from an optiona
 
 T10 remains complete in code; ClawHub review remains pending.
 
-The silent `availability-probe-openclaw` command cron is enabled and managed through `cronctl`. The reusable runner is pushed in `bd566ee`; local JSONL runtime data is intentionally untracked. T11 remains active for aggregate reporting and DeepSeek reference diagnosis.
+The silent `availability-probe-openclaw` command cron is currently disabled after the diagnostic run. It is managed through `cronctl`; the CLI compatibility fix is pushed in `aa77518`. The reusable runner is pushed in `bd566ee`; local JSONL runtime data is intentionally untracked. T11 remains active for aggregate reporting.
 
 The repository has two distinct result families: operational availability events in `data/model-availability/` and older task-capability benchmark artifacts in `tests/model-benchmarks/` and `kimi-benchmarks/`. Keep their raw schemas separate. A future derived `results/` layer should provide separate availability and capability aggregates plus an index.
 

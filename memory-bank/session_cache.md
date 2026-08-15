@@ -1,7 +1,7 @@
 # Session Cache
 
 *Created: 2026-08-14 17:35:37 IST*
-*Last Updated: 2026-08-14 18:24:33 IST*
+*Last Updated: 2026-08-16 02:07:36 IST*
 
 ## Current Session
 **Started**: 2026-08-14 17:35:37 IST
@@ -50,6 +50,12 @@ No code changes are planned beyond the token-usage skill. Keep notes short and c
 
 - Updated T11 memory-bank notes to record the deployed availability cron, the raw JSONL location, and the separation from existing capability benchmark datasets.
 - Aggregate reporting and a unified results index remain open.
+
+## 2026-08-16 02:07 IST
+
+- Updated `cronctl` for the current OpenClaw CLI and pushed `aa77518`.
+- Disabled the `availability-probe-openclaw` diagnostic job after the monitoring run.
+- Session closing; aggregate reporting remains the next T11 implementation step.
 
 ## 2026-08-14 18:30 IST
 

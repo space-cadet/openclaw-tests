@@ -164,6 +164,11 @@ OpenClaw has no built-in `enable`/`disable` command for cron jobs. The user had 
 3. **Maintenance mode** — works even if OpenClaw is down
 4. **Health visibility** — see failures without digging through individual job states
 
+### T8 maintenance update (2026-08-16)
+- [x] Updated single-job and bulk pause/resume operations for the current OpenClaw CLI (`cron disable` / `cron enable`).
+- [x] Included disabled jobs in lookup so paused jobs can be resumed.
+- [x] Documented the compatibility fix in the cron-management implementation notes.
+
 
 ## T9: Import mem-* Skills from .agents (2026-07-28) ✅ COMPLETE
 - [x] Copy `mem-update`, `mem-scan`, `mem-format`, `mem-load` from `~/.agents/skills/`
@@ -200,5 +205,6 @@ The `mb-text-workflow` skill had a critical flaw: it defaulted to workspace memo
 - [x] Specify silent measurement and hourly/4-hourly reporting schedules
 - [x] Integrate cron-management maintenance and naming conventions
 - [x] Deploy the silent OpenClaw availability runner and record raw JSONL results
+- [x] Pause the diagnostic availability cron after the monitoring run
 - [ ] Implement hourly/four-hourly aggregate reports and unified results index
 - See [T11 details](tasks/T11.md)
