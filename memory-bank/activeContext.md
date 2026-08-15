@@ -8,6 +8,8 @@ T10 remains complete in code; ClawHub review remains pending.
 
 The silent `availability-probe-openclaw` command cron is enabled and managed through `cronctl`. The reusable runner is pushed in `bd566ee`; local JSONL runtime data is intentionally untracked. T11 remains active for aggregate reporting and DeepSeek reference diagnosis.
 
+The repository has two distinct result families: operational availability events in `data/model-availability/` and older task-capability benchmark artifacts in `tests/model-benchmarks/` and `kimi-benchmarks/`. Keep their raw schemas separate. A future derived `results/` layer should provide separate availability and capability aggregates plus an index.
+
 The v2.4.0 code block is complete and pushed in commit `0371753`. ClawHub accepted the release for publication, but it is still pending review. The live latest tag remains 2.3.0 for now.
 
 The direct parser and SQLite importer now use the same parser. T10 also fixed provider pricing, cache totals, date grouping, CLI windows, and cron reports.

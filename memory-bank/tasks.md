@@ -195,8 +195,10 @@ The `mb-text-workflow` skill had a critical flaw: it defaulted to workspace memo
 - See [T10 details](tasks/T10.md)
 
 ## T11: Provider/model availability study harness 🔄 IN PROGRESS (2026-08-15)
-- [ ] Define provider/model-agnostic probe and JSONL event contract
-- [ ] Specify direct and OpenClaw harness modes
-- [ ] Specify silent measurement and hourly/4-hourly reporting schedules
-- [ ] Integrate cron-management maintenance and naming conventions
+- [x] Define provider/model-agnostic probe and JSONL event contract
+- [x] Specify direct and OpenClaw harness modes
+- [x] Specify silent measurement and hourly/4-hourly reporting schedules
+- [x] Integrate cron-management maintenance and naming conventions
+- [x] Deploy the silent OpenClaw availability runner and record raw JSONL results
+- [ ] Implement hourly/four-hourly aggregate reports and unified results index
 - See [T11 details](tasks/T11.md)

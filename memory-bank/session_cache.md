@@ -46,6 +46,11 @@ The direct parser supports more formats than the SQLite importer. The two paths 
 
 #### Working State
 No code changes are planned beyond the token-usage skill. Keep notes short and clear.
+## 2026-08-16 01:28 IST
+
+- Updated T11 memory-bank notes to record the deployed availability cron, the raw JSONL location, and the separation from existing capability benchmark datasets.
+- Aggregate reporting and a unified results index remain open.
+
 ## 2026-08-14 18:30 IST
 
 - T10 code work complete; commit `0371753` is pushed.

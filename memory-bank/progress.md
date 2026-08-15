@@ -2,6 +2,12 @@
 
 ## In Progress (2026-08-14)
 
+### T11: Availability and benchmark results organization (2026-08-16)
+- Recorded the deployed Kimi/DeepSeek availability cron and its local raw JSONL source in T11 memory-bank notes.
+- Confirmed existing capability benchmark data remains under `tests/model-benchmarks/` and `kimi-benchmarks/`.
+- Documented the separation between availability and capability schemas.
+- Aggregate reports and a unified results index remain planned, not implemented.
+
 ### T10: Token-usage consistency across providers
 - Audited the direct parser, SQLite importer, reports, pricing updater, and docs.
 - Found that direct parsing and SQLite ingestion do not support the same session formats.
