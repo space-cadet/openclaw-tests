@@ -27,7 +27,7 @@ warn() { echo -e "${YELLOW}$1${NC}"; }
 # Fetch all jobs as JSON
 fetch_jobs() {
   local json
-  json=$(openclaw cron list --json 2>/dev/null)
+  json=$(openclaw cron list --all --json 2>/dev/null)
   if [ -z "$json" ] || [[ "$json" != \{* ]]; then
     die "Failed to fetch cron jobs. Is OpenClaw running?"
   fi
@@ -86,7 +86,7 @@ cmd_pause() {
   local id
   id=$(get_job_id "$JOB_NAME")
   info "Pausing '$JOB_NAME' ($id)..."
-  openclaw cron update "$id" '{"enabled": false}'
+  openclaw cron disable "$id"
   success "Paused '$JOB_NAME'"
 }
 
@@ -95,7 +95,7 @@ cmd_resume() {
   local id
   id=$(get_job_id "$JOB_NAME")
   info "Resuming '$JOB_NAME' ($id)..."
-  openclaw cron update "$id" '{"enabled": true}'
+  openclaw cron enable "$id"
   success "Resumed '$JOB_NAME'"
 }
 
@@ -107,7 +107,7 @@ cmd_pause_all() {
   count=$(echo "$jobs_json" | jq '[.jobs[] | select(.enabled)] | length')
 
   echo "$jobs_json" | jq -r '.jobs[] | select(.enabled) | .id' | while read -r id; do
-    openclaw cron update "$id" '{"enabled": false}' 2>/dev/null || true
+    openclaw cron disable "$id" 2>/dev/null || true
   done
 
   success "Paused $count jobs"
@@ -121,7 +121,7 @@ cmd_resume_all() {
   count=$(echo "$jobs_json" | jq '[.jobs[] | select(.enabled | not)] | length')
 
   echo "$jobs_json" | jq -r '.jobs[] | select(.enabled | not) | .id' | while read -r id; do
-    openclaw cron update "$id" '{"enabled": true}' 2>/dev/null || true
+    openclaw cron enable "$id" 2>/dev/null || true
   done
 
   success "Resumed $count jobs"

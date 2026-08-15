@@ -145,7 +145,7 @@ cronctl maintenance off
 
 ## Job Naming Conventions
 
-The `cronctl` script uses fuzzy matching for job names:
+The `cronctl` script uses fuzzy matching for job names and requests disabled jobs from the native CLI so that paused jobs can be resumed:
 
 ```bash
 cronctl pause blog        # Matches "cloudy-blog-writer"
@@ -170,7 +170,7 @@ If `openclaw cron list` fails (gateway down, auth error):
 
 ```bash
 echo "$jobs_json" | jq -r '.jobs[] | select(.enabled) | .id' | while read -r id; do
-  openclaw cron update "$id" '{"enabled": false}' 2>/dev/null || true
+  openclaw cron disable "$id" 2>/dev/null || true
 done
 ```
 
