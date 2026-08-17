@@ -208,3 +208,15 @@ The `mb-text-workflow` skill had a critical flaw: it defaulted to workspace memo
 - [x] Pause the diagnostic availability cron after the monitoring run
 - [ ] Implement hourly/four-hourly aggregate reports and unified results index
 - See [T11 details](tasks/T11.md)
+
+## T12: Kimi Retry Storm Monitor ✅ COMPLETE (2026-08-17)
+- [x] Create `scripts/kimi-retry-monitor.sh` — gateway log tail approach
+- [x] Create `launchd/ai.openclaw.kimi-retry-monitor.plist` — macOS auto-start
+- [x] Implement burst detection (3 in-flight, 4 in 10s)
+- [x] Implement 429/rate-limit detection
+- [x] Implement `check [minutes]` query command with verdict logic
+- [x] Test all commands: start, stop, status, run, check
+- [x] Early finding: 10 HTTP 429s on 2026-08-17, all on k3/k2p6, none on k2.7
+- [ ] Cross-provider support (future)
+- [ ] Dashboard/JSONL integration with T11 (future)
+- See [T12 details](tasks/T12.md)
