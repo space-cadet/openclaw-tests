@@ -13,7 +13,35 @@ LOCAL_TZ = ZoneInfo(LOCAL_TZ_NAME)
 def normalize_model(model):
     """Return a stable provider/model name for pricing and reports."""
     value = (model or "unknown").strip().lower()
-    aliases = {"k2.6": "kimi/k2.6", "k2.7": "kimi/k2.7", "k3": "kimi/k3"}
+    aliases = {
+        # Kimi models
+        "k2.6": "kimi/k2.6", "k2.7": "kimi/k2.7", "k2.7-code": "kimi/k2.7-code",
+        "k3": "kimi/k3", "k3-1m": "kimi/k3-1m",
+        # OpenAI/GPT models (session logs often store bare names)
+        "gpt-5.6-luna": "openai/gpt-5.6-luna",
+        "gpt-5.6-luna-pro": "openai/gpt-5.6-luna-pro",
+        "gpt-5.6-terra": "openai/gpt-5.6-terra",
+        "gpt-5.6-terra-pro": "openai/gpt-5.6-terra-pro",
+        "gpt-5.6-sol-pro": "openai/gpt-5.6-sol-pro",
+        "gpt-5.4": "openai/gpt-5.4",
+        "gpt-5.4-mini": "openai/gpt-5.4-mini",
+        "gpt-5.4-nano": "openai/gpt-5.4-nano",
+        "gpt-4o": "openai/gpt-4o",
+        "gpt-4o-mini": "openai/gpt-4o-mini",
+        # Anthropic models
+        "claude-sonnet-4.5": "anthropic/claude-sonnet-4.5",
+        "claude-opus-5": "anthropic/claude-opus-5",
+        # Google models
+        "gemini-3.7-flash": "google/gemini-3.7-flash",
+        "gemini-3.6-flash": "google/gemini-3.6-flash",
+        "gemini-3.5-flash": "google/gemini-3.5-flash",
+        # DeepSeek
+        "deepseek-v4": "deepseek/deepseek-v4",
+        "deepseek-v4-pro": "deepseek/deepseek-v4-pro",
+        # Qwen
+        "qwen3.8-max": "qwen/qwen3.8-max",
+        "qwen3.8-27b": "qwen/qwen3.8-27b",
+    }
     return aliases.get(value, value)
 
 

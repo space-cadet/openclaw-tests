@@ -15,10 +15,16 @@ import glob
 from common import find_sessions as find_shared_sessions, parse_session as parse_shared_session, normalize_model, local_timestamp, local_date
 
 DEFAULT_PRICING = {
-    "kimi/k2.7": {"input": 0.50, "output": 2.00, "cache_read": 0.10, "cache_write": 1.00},
-    "anthropic/claude-sonnet-4-5": {"input": 3.00, "output": 15.00, "cache_read": 0.30, "cache_write": 3.75},
+    "kimi/k2.7": {"input": 0.90, "output": 3.75, "cache_read": 0.10, "cache_write": 1.00},
+    "kimi/k2.7-code": {"input": 0.90, "output": 3.75, "cache_read": 0.10, "cache_write": 1.00},
+    "kimi/k3": {"input": 2.78, "output": 13.89, "cache_read": 0.28, "cache_write": 2.78},
+    "kimi/k3-1m": {"input": 2.78, "output": 13.89, "cache_read": 0.28, "cache_write": 2.78},
+    "anthropic/claude-sonnet-4.5": {"input": 3.00, "output": 15.00, "cache_read": 0.30, "cache_write": 3.75},
     "openai/gpt-4o": {"input": 2.50, "output": 10.00, "cache_read": 1.25, "cache_write": 0},
     "openai/gpt-4o-mini": {"input": 0.15, "output": 0.60, "cache_read": 0.075, "cache_write": 0},
+    "openai/gpt-5.6-luna": {"input": 0.20, "output": 1.20, "cache_read": 0.02, "cache_write": 0},
+    "openai/gpt-5.6-terra": {"input": 2.00, "output": 12.00, "cache_read": 0.20, "cache_write": 0},
+    "openai/gpt-5.4": {"input": 2.50, "output": 15.00, "cache_read": 0.25, "cache_write": 0},
 }
 
 def load_pricing():
