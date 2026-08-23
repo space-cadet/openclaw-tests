@@ -150,3 +150,17 @@
 - Scripts: 7 (+ cronctl.sh)
 - Tests: 2 suites (kimi-benchmarks, subagent-tests)
 - Lines of documentation: ~3200 (README + CONTRIBUTING + skill-cards)
+
+## Current Investigation (2026-08-23) — Updated with Instance B
+
+- T13: Kimi/OpenClaw long-context tool degradation
+  - ✅ Recorded the repeatable cross-instance tool failure near 130k context.
+  - ✅ Recorded Telegram delivery-mirror duplication as a confirmed
+    context-inflation mechanism, while keeping causation tentative.
+  - ✅ Added the sanitized shared report under
+    `kimi-benchmarks/context-degradation/`.
+  - ✅ **Instance B (Cloudy) reviewed and appended first-hand observations**:
+    live degradation timeline, "silent tool death" phenomenology,
+    duplication pattern discovery, theory history with corrections,
+    and cross-instance sign-off.
+  - 🔄 Cross-channel comparison and mirror-exclusion test remain open.

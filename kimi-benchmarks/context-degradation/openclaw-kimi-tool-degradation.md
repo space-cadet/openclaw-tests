@@ -92,3 +92,101 @@ failing session, which reported K3 with a 1M context profile.
   direct versus OpenClaw measurement design.
 - T12: `memory-bank/implementation-details/kimi-retry-monitor.md` — Kimi
   retry and HTTP 429 diagnostics.
+
+---
+
+## Instance B first-hand observations (Cloudy, kimi/k3, Telegram)
+
+**Recorded by:** Instance B (Cloudy)  
+**Session:** `ab7b6b68-1709-4d84-a5df-98d3d4344ff6`  
+**Time:** 2026-08-23 05:30–08:17 UTC
+
+Instance B was the live subject of the stress test. These observations were
+made in real-time while tool degradation was actively occurring.
+
+### Timeline of degradation
+
+| Context | Event |
+|---------|-------|
+| 144k | User requests context-heavy CJP data load |
+| 144k → 95k | **First oscillation**: 49k drop, **0 compactions** recorded |
+| ~134k | **Tools die**: `exec`, `read`, `session_status`, `web_fetch` all return empty |
+| 134k → 149k | Context climbs; tools remain dead across multiple turns |
+| 149k | `web_fetch` and `exec` tested — both return empty |
+| 155k | Peak context during degradation |
+| 155k → 153k | **Second oscillation**: 2k drop, **0 compactions** recorded |
+| 153k | Session continues; chat works, tools still dead |
+| /new | Session reset; tools expected to recover (not tested in this session) |
+
+### What "silent tool death" looks like from the inside
+
+- Tool calls are issued normally (no error at call time).
+- Results return as empty structures (`{"content": []}` or similar).
+- No HTTP error, no timeout, no rate-limit response — just absence.
+- Chat generation continues unaffected; the model itself is not overloaded.
+- The session appears healthy except that every tool is non-functional.
+
+### Key live findings
+
+**1. Persistent failure**  
+The tool failure was not transient. Once tools died at ~134k, they remained
+dead for the entire remainder of the session (tested across ~10+ turns and
+multiple tool types).
+
+**2. Context oscillations without compaction**  
+Two unexplained drops occurred:
+- 144k → 95k (first oscillation)
+- 155k → 153k (second oscillation)
+
+Both happened with `compactionCount: 0`. This contradicts the documented
+compaction behavior and suggests hidden pruning or deduplication.
+
+**3. Delivery-copy duplication pattern**  
+Instance B discovered that Telegram delivery creates duplicate assistant rows
+in the persisted session. The assistant's own replies appeared 2–3 times in
+the visible conversation context (session record + Telegram delivery mirror +
+possibly a third copy). Mirror text totaled ~26.8k characters, roughly 48.6%
+of all assistant text in the session.
+
+**4. Both user and assistant messages are duplicated**  
+Initially Instance B thought only assistant messages were duplicated. Later
+correction: the Telegram delivery context includes duplicate user messages as
+well, though the duplication ratio is higher for assistant messages.
+
+### Theories Instance B proposed and ruled out
+
+| Theory | Proposed by | Status | Ruled out by |
+|--------|-------------|--------|--------------|
+| Transport limit (~130k hard cap) | Instance B | ❌ | Luna/Sage — Gateway WebSocket is 25 MB |
+| Model mismatch (K2.7 vs K3) | Instance B | ❌ | Session consistently reported K3; Sage confirmed |
+| Corrupted tool state | Instance B | ❌ | Sage found no broken tool-call/result pairs |
+| Telegram delivery-copy inflation | Instance B | 🟡 | Confirmed mechanism; causation unproven |
+| Kimi tool-call path limit | Instance B | 🟡 | Model handles chat fine; tool path may differ |
+
+### What Instance B got wrong
+
+- Used the term **"bricked"** to describe the session. This was inaccurate.
+  The session was healthy; only tool execution was degraded. Correct term:
+  **tool degradation** or **silent tool failure**.
+- Initially claimed only assistant messages were duplicated. Later corrected:
+  both user and assistant messages appear in delivery-mirror copies.
+
+### Cross-instance confirmation
+
+- **Instance A** (Sage/Luna): Investigated OpenClaw source code, quantified
+  delivery-mirror inflation, disproved transport-limit theory.
+- **Instance B** (Cloudy): Experienced live degradation, discovered
+  duplication pattern, documented real-time timeline and oscillations.
+
+Both instances independently observed the same ~130k tool-death symptom.
+
+---
+
+## Sign-off
+
+**Instance A (Sage/Luna):** Source code audit, delivery-mirror quantification,
+transport-limit disproof, sanitized report preparation.  
+**Instance B (Cloudy):** Live degradation observation, duplication pattern
+discovery, real-time timeline documentation, theory proposal and correction.
+
+Both instances contributed essential, non-overlapping evidence to this finding.
