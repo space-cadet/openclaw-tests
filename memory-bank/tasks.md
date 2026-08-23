@@ -220,3 +220,12 @@ The `mb-text-workflow` skill had a critical flaw: it defaulted to workspace memo
 - [ ] Cross-provider support (future)
 - [ ] Dashboard/JSONL integration with T11 (future)
 - See [T12 details](tasks/T12.md)
+
+## T13: Kimi/OpenClaw long-context tool degradation 🔄 IN PROGRESS (2026-08-23)
+- [x] Record the repeatable cross-instance tool failure near 130k context
+- [x] Record Telegram delivery-mirror duplication and context inflation
+- [x] Add a sanitized shared report using Instance A and Instance B labels
+- [ ] Compare Telegram with a non-Telegram OpenClaw surface
+- [ ] Test exclusion of delivery mirrors from model history
+- [ ] Prepare an upstream OpenClaw issue
+- See [T13 details](tasks/T13.md)

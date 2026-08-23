@@ -6,19 +6,40 @@
 ## Current Session
 **Started**: 2026-08-14 17:35:37 IST
 **Focus Task**: T11 - Provider/model availability study harness
-**Session File**: `sessions/2026-08-14-evening.md`
+**Session File**: `sessions/2026-08-23-afternoon.md`
 
 ## Overview
-- Active Tasks: 2
+- Active Tasks: 3
 - Paused Tasks: 0
-- Last Session: `sessions/2026-08-14-evening.md`
-- Current Period: evening
-- Last Task Focus: T10
+- Last Session: `sessions/2026-08-23-afternoon.md`
+- Current Period: afternoon
+- Last Task Focus: T13
 
 ## Session History
-1. `sessions/2026-08-14-evening.md` - Token-usage audit and work plan
+1. `sessions/2026-08-23-afternoon.md` - T13 context-degradation record
+2. `sessions/2026-08-14-evening.md` - Token-usage audit and work plan
 
 ## Active Tasks
+
+### T13: Kimi/OpenClaw long-context tool degradation
+**Status:** 🔄 IN PROGRESS
+**Priority:** HIGH
+**Started:** 2026-08-23 13:59:47 IST
+**Last Active:** 2026-08-23 14:03:00 IST
+**Dependencies:** T7, T11, T12
+
+#### Context
+Two independent OpenClaw instances showed silent tool failure near 130k
+reported context while text continued. Telegram delivery-mirror rows are a
+confirmed context-inflation mechanism; direct causation remains unproven.
+
+#### Critical Files
+- `kimi-benchmarks/context-degradation/openclaw-kimi-tool-degradation.md`
+- `memory-bank/tasks/T13.md`
+
+#### Progress
+1. ✅ Added the sanitized shared report and task record.
+2. 🔄 Cross-channel comparison and mirror-exclusion test remain.
 
 ### T10: Make token-usage tracking consistent across providers
 **Status:** 🔄 IN PROGRESS

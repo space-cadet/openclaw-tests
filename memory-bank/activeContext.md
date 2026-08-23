@@ -1,6 +1,14 @@
 # Active Context: openclaw-tools
 
-## Current Focus: T11 Provider/model availability study (2026-08-15)
+## Current Focus: T13 Kimi/OpenClaw long-context tool degradation (2026-08-23)
+
+T13 records a repeatable cross-instance failure near 130k reported context:
+Kimi tool calls become unusable while text conversation continues. Telegram
+delivery-mirror rows are confirmed to inflate persisted assistant history, but
+their direct causal role is not yet proven. The shared evidence report uses
+Instance A and Instance B labels and retains the relevant K3/1M context figures.
+
+## Related prior focus: T11 Provider/model availability study (2026-08-15)
 
 T11 is in planning. The design separates a direct provider probe from an optional OpenClaw-mediated harness, records every attempt in provider/model-agnostic JSONL, suppresses per-call notifications, and reserves hourly/four-hourly aggregate reports for user-facing delivery. It follows the existing cron-management maintenance flag and naming conventions.
 

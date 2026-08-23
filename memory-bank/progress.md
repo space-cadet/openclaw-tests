@@ -107,6 +107,14 @@
 ## In Progress
 - T2: Benchmark verification (tests moved, not yet verified)
 
+## Current Investigation (2026-08-23)
+- T13: Kimi/OpenClaw long-context tool degradation
+  - Recorded the repeatable cross-instance tool failure near 130k context.
+  - Recorded Telegram delivery-mirror duplication as a confirmed
+    context-inflation mechanism, while keeping causation tentative.
+  - Added the sanitized shared report under
+    `kimi-benchmarks/context-degradation/`.
+
 ## Not Started
 - GitHub Actions CI (optional)
 
