@@ -41,7 +41,12 @@ Measure how reasoning effort affects correctness, depth, and token usage on gpt-
 1. ✅ Smoke test: low vs max on geometric series
 2. ✅ Confirm native Codex routing
 3. ✅ Design 5-task benchmark suite
-4. 🔄 Next: Run T2 (pivot force) across all 5 levels
+4. ✅ Run T2 (pivot force) across low/medium/high
+   - Low: 100/100 ✅ (R=5mg/2 upward)
+   - Medium: 50/100 ❌ (sign error: R=mg/2 downward)
+   - High: 50/100 ❌ (same sign error)
+   - Key finding: Low outperformed medium/high
+5. 🔄 Next: Run T3 (Markov chain) across low/medium/high
 
 ### T13: Kimi/OpenClaw long-context tool degradation
 **Status:** 🔄 IN PROGRESS

@@ -7,9 +7,14 @@
   - Low: 8s, 99 output tokens, correct
   - Max: 10s, 159 output tokens, correct + partial sums insight
   - Native Codex routing confirmed (provider: openai, api: openai-responses)
-- **5-task suite designed**: T2 pivot force, T3 Markov chain, T4 async bug, T5 Ramsey planner
-- **Scoring rubric defined**: 40% answer / 30% approach / 20% trap / 10% clean
-- **Next**: Run T2 across all 5 thinking levels
+- **T2 (pivot force) completed** — low/medium/high
+  - Low: 18s, 443 tokens, **100/100** ✅ (R=5mg/2 upward)
+  - Medium: 20s, 541 tokens, **50/100** ❌ (sign error: R=mg/2 downward)
+  - High: 37s, 786 tokens, **50/100** ❌ (same sign error)
+  - Key finding: Low outperformed medium/high — "overthinking" caused sign convention misinterpretation
+- **Scoring rubric validated**: 40% answer / 30% approach / 20% trap / 10% clean
+- Results recorded in `tests/thinking-benchmarks/results.json`
+- 🔄 Next: Run T3 (Markov chain) across low/medium/high
 - See [T14 details](tasks/T14.md)
 
 - Recorded the deployed Kimi/DeepSeek availability cron and its local raw JSONL source in T11 memory-bank notes.
