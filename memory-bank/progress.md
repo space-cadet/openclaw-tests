@@ -1,8 +1,17 @@
 # Progress: openclaw-tools Reorganization
 
-## In Progress (2026-08-14)
+## In Progress (2026-09-02)
 
-### T11: Availability and benchmark results organization (2026-08-16)
+### T14: OpenAI Luna Thinking Level Benchmark
+- **Smoke test completed** (T1: geometric series, low vs max)
+  - Low: 8s, 99 output tokens, correct
+  - Max: 10s, 159 output tokens, correct + partial sums insight
+  - Native Codex routing confirmed (provider: openai, api: openai-responses)
+- **5-task suite designed**: T2 pivot force, T3 Markov chain, T4 async bug, T5 Ramsey planner
+- **Scoring rubric defined**: 40% answer / 30% approach / 20% trap / 10% clean
+- **Next**: Run T2 across all 5 thinking levels
+- See [T14 details](tasks/T14.md)
+
 - Recorded the deployed Kimi/DeepSeek availability cron and its local raw JSONL source in T11 memory-bank notes.
 - Confirmed existing capability benchmark data remains under `tests/model-benchmarks/` and `kimi-benchmarks/`.
 - Documented the separation between availability and capability schemas.

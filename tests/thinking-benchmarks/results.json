@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "benchmark_name": "thinking-benchmarks",
+  "description": "OpenAI gpt-5.6-luna thinking level benchmark via native Codex",
+  "model": "openai/gpt-5.6-luna",
+  "provider": "openai",
+  "last_updated": "2026-09-02T12:00:00Z",
+  "tasks": [
+    {
+      "id": "t1-geometric-series",
+      "name": "Geometric Series Proof",
+      "category": "math",
+      "difficulty": "easy",
+      "description": "Baseline smoke test"
+    },
+    {
+      "id": "t2-pivot-force",
+      "name": "Pivot Reaction Force",
+      "category": "physics",
+      "difficulty": "medium",
+      "description": "Hidden constraint trap"
+    },
+    {
+      "id": "t3-markov-chain",
+      "name": "Markov Chain Asymmetry",
+      "category": "probability",
+      "difficulty": "medium",
+      "description": "Counterintuitive asymmetry"
+    },
+    {
+      "id": "t4-async-bug",
+      "name": "Async Closure Bug",
+      "category": "coding",
+      "difficulty": "medium-hard",
+      "description": "Execution state tracing"
+    },
+    {
+      "id": "t5-ramsey-graph",
+      "name": "Ramsey Planner on Graph",
+      "category": "optimization",
+      "difficulty": "hard",
+      "description": "Long-horizon planning"
+    }
+  ],
+  "runs": [],
+  "summary": {
+    "total_runs": 0,
+    "runs_by_level": {
+      "low": 0,
+      "medium": 0,
+      "high": 0,
+      "xhigh": 0,
+      "max": 0
+    }
+  }
+}

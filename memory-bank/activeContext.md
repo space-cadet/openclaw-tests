@@ -1,14 +1,21 @@
 # Active Context: openclaw-tools
 
-## Current Focus: T13 Kimi/OpenClaw long-context tool degradation (2026-08-23)
+## Current Focus: T14 OpenAI Luna Thinking Level Benchmark (2026-09-02)
 
-T13 records a repeatable cross-instance failure near 130k reported context:
-Kimi tool calls become unusable while text conversation continues. Telegram
-delivery-mirror rows are confirmed to inflate persisted assistant history, but
-their direct causal role is not yet proven. The shared evidence report uses
-Instance A and Instance B labels and retains the relevant K3/1M context figures.
+T14 measures how reasoning effort (low → max) affects correctness, depth, and token usage on gpt-5.6-luna via native Codex authentication. The smoke test confirmed the mechanism works: both low and max thinking levels route through native Codex (provider: openai, api: openai-responses) with observable differences in output depth (99 vs 159 tokens on a simple geometric series proof).
 
-## Related prior focus: T11 Provider/model availability study (2026-08-15)
+The benchmark suite comprises 5 tasks of increasing complexity:
+1. T1 — Geometric series proof (baseline, ✅ done)
+2. T2 — Pivot reaction force (physics derivation with hidden trap)
+3. T3 — Coin-flip Markov chain (counterintuitive probability)
+4. T4 — Async closure bug (code review, execution state tracing)
+5. T5 — Ramsey planner on graph (long-horizon planning)
+
+Per-task: 5 subagents in parallel (low/medium/high/xhigh/max). Total: 25 subagents. Metrics: runtime, tokens, score breakdown, self-corrections, first-pass vs final score.
+
+## Previous focus: T13 Kimi/OpenClaw long-context tool degradation (2026-08-23)
+
+T13 records a repeatable cross-instance failure near 130k reported context. Remains open for cross-channel comparison and mirror-exclusion tests.
 
 T11 is in planning. The design separates a direct provider probe from an optional OpenClaw-mediated harness, records every attempt in provider/model-agnostic JSONL, suppresses per-call notifications, and reserves hourly/four-hourly aggregate reports for user-facing delivery. It follows the existing cron-management maintenance flag and naming conventions.
 

@@ -1,25 +1,47 @@
 # Session Cache
 
 *Created: 2026-08-14 17:35:37 IST*
-*Last Updated: 2026-08-16 02:07:36 IST*
+*Last Updated: 2026-09-02 17:37 IST*
 
 ## Current Session
-**Started**: 2026-08-14 17:35:37 IST
-**Focus Task**: T11 - Provider/model availability study harness
-**Session File**: `sessions/2026-08-23-afternoon.md`
+**Started**: 2026-09-02 17:37 IST
+**Focus Task**: T14 - OpenAI Luna Thinking Level Benchmark
+**Session File**: `sessions/2026-09-02-afternoon.md`
 
 ## Overview
-- Active Tasks: 3
+- Active Tasks: 4
 - Paused Tasks: 0
 - Last Session: `sessions/2026-08-23-afternoon.md`
 - Current Period: afternoon
-- Last Task Focus: T13
+- Last Task Focus: T14
 
 ## Session History
-1. `sessions/2026-08-23-afternoon.md` - T13 context-degradation record
-2. `sessions/2026-08-14-evening.md` - Token-usage audit and work plan
+1. `sessions/2026-09-02-afternoon.md` - T14 Luna thinking benchmark
+2. `sessions/2026-08-23-afternoon.md` - T13 context-degradation record
+3. `sessions/2026-08-14-evening.md` - Token-usage audit and work plan
 
 ## Active Tasks
+
+### T14: OpenAI Luna Thinking Level Benchmark
+**Status:** 🔄 IN PROGRESS
+**Priority:** MEDIUM
+**Started:** 2026-09-02 17:37 IST
+**Last Active:** 2026-09-02 17:37 IST
+**Dependencies:** T7, T11
+
+#### Context
+Measure how reasoning effort affects correctness, depth, and token usage on gpt-5.6-luna via native Codex auth. Smoke test confirmed low vs max produces observable differences (99 vs 159 tokens). Full suite: 5 tasks × 5 levels = 25 subagents.
+
+#### Critical Files
+- `memory-bank/tasks/T14.md`
+- `tests/thinking-benchmarks/task-spec.md` (to create)
+- `tests/thinking-benchmarks/results.json` (to create)
+
+#### Progress
+1. ✅ Smoke test: low vs max on geometric series
+2. ✅ Confirm native Codex routing
+3. ✅ Design 5-task benchmark suite
+4. 🔄 Next: Run T2 (pivot force) across all 5 levels
 
 ### T13: Kimi/OpenClaw long-context tool degradation
 **Status:** 🔄 IN PROGRESS

@@ -221,7 +221,20 @@ The `mb-text-workflow` skill had a critical flaw: it defaulted to workspace memo
 - [ ] Dashboard/JSONL integration with T11 (future)
 - See [T12 details](tasks/T12.md)
 
-## T13: Kimi/OpenClaw long-context tool degradation 🔄 IN PROGRESS (2026-08-23)
+## T14: OpenAI Luna Thinking Level Benchmark 🔄 IN PROGRESS (2026-09-02)
+- [x] Smoke test: low vs max thinking on geometric series
+- [x] Confirm native Codex routing (provider: openai)
+- [ ] Design 5-task benchmark suite (T2-T5)
+- [ ] Write task specifications
+- [ ] Run T2 (pivot force) across all 5 levels
+- [ ] Run T3 (Markov chain) across all 5 levels
+- [ ] Run T4 (async bug) across all 5 levels
+- [ ] Run T5 (Ramsey planner) across all 5 levels
+- [ ] Blind scoring and results aggregation
+- [ ] Update results.json and index.html
+- See [T14 details](tasks/T14.md)
+
+
 - [x] Record the repeatable cross-instance tool failure near 130k context
 - [x] Record Telegram delivery-mirror duplication and context inflation
 - [x] Add a sanitized shared report using Instance A and Instance B labels
