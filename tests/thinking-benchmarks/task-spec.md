@@ -24,14 +24,19 @@
 
 **Category:** Physics  
 **Difficulty:** Medium  
-**Status:** Ready to run
+**Status:** Partially completed — low/medium/high done; xhigh/max pending
 
 **Prompt:**
 > A uniform rod of mass m and length L is pivoted at one end and released from rest in horizontal position. Find the reaction force at the pivot when the rod passes through the vertical position. Show your work clearly.
 
 **Correct answer:** R = 5mg/2
 
-**Trap:** Most solvers assume F = mg or apply energy conservation without separating translational and rotational dynamics.
+**Trap:** Most solvers assume F = mg or apply energy conservation without separating translational and rotational dynamics. Additionally, medium/high thinking may overthink sign conventions and incorrectly conclude acceleration is downward.
+
+**Preliminary results (n=1):**
+- Low: 100/100 ✅ (R = 5mg/2 upward, 443 tokens, 18s)
+- Medium: 50/100 ❌ (sign error, R = mg/2 downward, 541 tokens, 20s)
+- High: 50/100 ❌ (same sign error, 786 tokens, 37s)
 
 **Scoring rubric (100 points):**
 - **40 pts** — Correct final answer (R = 5mg/2 or equivalent)

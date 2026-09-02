@@ -44,9 +44,25 @@ OpenRouter does not expose thinking level controls. The native Codex app-server 
 - **Subjective scoring** — My judgment on "identifies the trap" is not objective.
 - **Context window** — Small tasks (< 500 tokens). Long-context reasoning is not tested.
 
+## Preliminary Findings (T2, n=1 per level)
+
+⚠️ **Caution:** These are observations from a single trial, not evidence. Repeat runs may differ.
+
+**T2 (pivot reaction force):** Low thinking outperformed medium and high.
+
+| Level | Score | Tokens | Runtime | Outcome |
+|-------|-------|--------|---------|---------|
+| Low | 100/100 | 443 | 18s | Correct: R = 5mg/2 upward |
+| Medium | 50/100 | 541 | 20s | Sign error: R = mg/2 downward |
+| High | 50/100 | 786 | 37s | Same sign error, more elaborate reasoning |
+
+**Hypothesis:** Low thinking followed the mechanical recipe (energy → ω → force balance) without overthinking geometry. Medium/high tried to be careful about sign conventions, overcorrected, and convinced themselves "toward the pivot" means downward because the CM is physically below the pivot. This suggests that **more reasoning effort does not guarantee correctness** when the reasoning path contains a subtle misstep.
+
+**Implication for benchmark design:** Tasks with geometric/spatial reasoning traps may show inverted performance curves (low > medium > high). This is a feature, not a bug — it tests whether the model knows when to stop reasoning.
+
 ## Future Work
 
 - Add Sol and Terra comparisons
-- Repeat runs for variance
+- Repeat runs for variance (especially T2 — is the inverted curve reproducible?)
 - Automate scoring (pattern matching on key phrases)
 - Add long-context tasks (multi-step proofs, document analysis)
